@@ -7,6 +7,11 @@ The source in `src/` reassembles byte for byte into a **decoded** 16K ROM image.
 variable and table is named and commented. The comments say what the code does and why, and
 whether a behaviour was observed in an emulator or only read from the code.
 
+VDOS is **public domain**: vortex Computersysteme GmbH released it in 1995 (see
+[License](#license-public-domain)). Download the ROM:
+**[VDOS-2.11-X.rom](https://github.com/SerErris/Vortex_VDOS/releases/download/v2.11/VDOS-2.11-X.rom)**
+(release [v2.11](https://github.com/SerErris/Vortex_VDOS/releases/tag/v2.11)).
+
 ## The ROM and its scrambling
 
 The original EPROM on the Vortex controller is scrambled. The controller's logic passes opcode
@@ -29,6 +34,7 @@ needs no decoding hardware.
 | `docs/vdos_rom_analysis.md` | the analysis: ROM layout, RSX commands, disc BIOS, internal BDOS, CP/M boot, XMON monitor, RAM variables, tests |
 | `docs/bugs.md` | all bugs found, with the place, the cause and how to fix them |
 | `docs/todo.md` | open points of the analysis |
+| `docs/VDOSisPD.pdf` | vortex's letter of 13 February 1995 that releases VDOS as public domain |
 
 The documents mention working files of the analysis (emulator configurations, test discs,
 traces under `output/`, the cpcxray annotation file); those are not part of this repository.
@@ -60,7 +66,18 @@ The 2.11 release is the original VDOS 2.11-X, unchanged: the source documents th
 is, bugs included. The bugs are listed in `docs/bugs.md`; fixes are planned for a new version
 (2.12-X), made in the source.
 
-## Credits and copyright
+## License: public domain
 
-VDOS 2.11-X is © 1986 vortex GmbH. This repository documents the ROM for preservation and
-study; the disassembly and the documentation were made with the CPC X-Ray emulator.
+VDOS was written by vortex GmbH (© 1986). In a letter of **13 February 1995** vortex
+Computersysteme GmbH, Flein (signed by the managing director Monika Armbruster), released the
+disc operating system VDOS for the Amstrad / Schneider CPC as **public domain** - on the
+condition that this causes vortex no technical support work. The letter:
+[`docs/VDOSisPD.pdf`](docs/VDOSisPD.pdf).
+
+So the ROM ([VDOS-2.11-X.rom](https://github.com/SerErris/Vortex_VDOS/releases/download/v2.11/VDOS-2.11-X.rom))
+may be used and passed on freely. Please do not contact vortex with questions about VDOS; use the
+issues of this repository instead.
+
+## Credits
+
+VDOS: vortex GmbH. The disassembly and the documentation were made with the CPC X-Ray emulator.
