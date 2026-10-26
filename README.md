@@ -35,6 +35,7 @@ needs no decoding hardware.
 | `docs/bugs.md` | all bugs found, with the place, the cause and how to fix them |
 | `docs/todo.md` | open points of the analysis |
 | `docs/VDOSisPD.pdf` | vortex's letter of 13 February 1995 that releases VDOS as public domain |
+| `docs/Vortex_X-Laufwerke_Manual_2.0.md` | the original user manual of the Vortex X drives (German, rev. 1 of 17.4.1986) - it describes **VDOS 2.0**; an edition updated for 2.11-X (with the known bugs) is planned |
 
 The documents mention working files of the analysis (emulator configurations, test discs,
 traces under `output/`, the cpcxray annotation file); those are not part of this repository.
