@@ -2,6 +2,8 @@
 
 **Benutzerhandbuch** · Rev. 1 / 17.4.1986 · 1. Auflage · © 1986 vortex Computersysteme GmbH
 
+**Überarbeitete Ausgabe für VDOS 2.11-X** · 2026 · Das Originalhandbuch beschreibt VDOS 2.0. Diese Ausgabe ist an das tatsächliche Verhalten von VDOS 2.11-X von 1986 angepaßt (im Emulator geprüft); die bekannten Fehler stehen im Kapitel [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x).
+
 ---
 
 ## Inhaltsverzeichnis
@@ -39,7 +41,8 @@
   - [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout)
 - [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor)
 - [Der VDOS Befehl |ROMOFF](#der-vdos-befehl-romoff)
-- [Der VDOS Befehl |ROMS](#der-vdos-befehl-roms)
+- [Der VDOS Befehl |ROMCAT](#der-vdos-befehl-romcat)
+- [Die VDOS Befehle |FAST, |SLOW und |FRAME](#die-vdos-befehle-fast-slow-und-frame)
 - [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung)
 - [Der VDOS Befehl |FILES](#der-vdos-befehl-files)
 - [Der VDOS Befehl |OPEN](#der-vdos-befehl-open)
@@ -78,6 +81,7 @@
 - [Pinbelegung der Connectoren](#pinbelegung-der-connectoren)
 - [Stichwortverzeichnis](#stichwortverzeichnis)
 - [Anhang: Das EOF Problem](#anhang-das-eof-problem)
+- [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x)
 
 ---
 
@@ -393,11 +397,11 @@ Geben Sie z.B. einmal folgendes ein:
 ```
 |DIR<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 TEST    .BAS  INSTALL .COM  TEST    .BIN  RUNNER  .BAS
 
-60K belegt, 4 Dateien, 109K frei
+ 60K in   4 Files, 109K frei
 
 Ready
 ```
@@ -410,11 +414,11 @@ Es gibt bei den VDOS Befehlen (sind externe Befehle) noch eine weitere Besonderh
 A$="*.BAS"<ENTER>
 |DIR,@A$<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 TEST    .BAS  RUNNER  .BAS
 
-60K belegt, 2 Dateien, 109K frei
+ 60K in   2 Files, 109K frei
 ```
 
 Beim `|DIR` Befehl hätten wir aber auch direkt sagen können:
@@ -458,7 +462,7 @@ Legen Sie einmal in Ihr vortex X-Laufwerk eine verpackungsneue Diskette ein. For
 Laufwerk B: Diskette eingelegt J/N ?
 J
 
-Init-Seite 1 Spur 79
+Seite 1 Spur 79
 Ready
 ```
 
@@ -468,29 +472,29 @@ Damit ist diese Diskette formatiert. Geben Sie nun einmal
 |B<ENTER>
 |DIR<ENTER>
 
-Laufwerk B: User 0
+Laufwerk B: User  0
 
-4K belegt, 0 Dateien, 704K frei
+  0K in   0 Files, 704K frei
 Ready
 ```
 
-Wie Sie sehen, ist die Diskette vollkommen leer ("0 Dateien").
+Wie Sie sehen, ist die Diskette vollkommen leer ("0 Files").
 
 Geben Sie nun einmal folgendes ein:
 
 ```
 |A<ENTER>
 |FORMAT,1<ENTER>
-FORMAT (S,D) ? S
 Laufwerk A: Diskette eingelegt J/N ?
 J
-Init-Seite 0 Spur 39
+Format (S,D) ? S
+Seite 0 Spur 39
 Ready
 ```
 
 Hiermit wird die 3"-Diskette im Laufwerk A (dem 3"-Laufwerk) formatiert. Wie Sie sehen, kann man hier noch zwischen zwei Formaten wählen (S/D): System- und Datenformat.
 
-Grundsätzlich wird Ihnen dann die Frage `FORMAT (S,D) ?` gestellt, wenn Sie mit `|FORMAT,1<ENTER>` oder `|FORMAT,2<ENTER>` auf das 3"-Laufwerk "treffen". `|FORMAT,2<ENTER>` "trifft" dann auf das 3"-Laufwerk, wenn Sie zuvor Laufwerk A und Laufwerk B mit dem VDOS Befehl `|X` vertauscht haben, so daß dann Laufwerk A das vortex X-Laufwerk und Laufwerk B das 3"-Laufwerk ist.
+Grundsätzlich wird Ihnen dann (nach der Frage `Diskette eingelegt J/N ?`) die Frage `Format (S,D) ?` gestellt, wenn Sie mit `|FORMAT,1<ENTER>` oder `|FORMAT,2<ENTER>` auf das 3"-Laufwerk "treffen". `|FORMAT,2<ENTER>` "trifft" dann auf das 3"-Laufwerk, wenn Sie zuvor Laufwerk A und Laufwerk B mit dem VDOS Befehl `|X` vertauscht haben, so daß dann Laufwerk A das vortex X-Laufwerk und Laufwerk B das 3"-Laufwerk ist.
 
 Geben Sie "S" ein, dann wird die 3"-Diskette mit 40 Spuren zu je 9 Sektoren formatiert (Sektornummern `41H`–`49H`). Dieses Format ist identisch mit dem "Systemformat" und dem "Vendorformat". Beide Formate haben zwei reservierte Spuren, aber nur das Systemformat enthält das CP/M Betriebssystem. Das Vendorformat ist für den Fall vorgesehen, daß Sie z.B. eigenentwickelte CP/M Software auf der 3"-Diskette verkaufen wollen. Selbstverständlich können Sie diese Disketten nicht mit dem CP/M ausliefern, deshalb kopieren Sie Ihre Software auf eine im Vendorformat ("VerkaufsfORMAT") formatierte Diskette, die zwar die zwei Spuren enthält, die das CP/M aufnehmen können, das CP/M selbst fehlt aber. Ihr Kunde kann sich sehr einfach (z.B. mit `BOOTGEN` und `SYSGEN`) "sein" CP/M auf diese Diskette kopieren.
 
@@ -505,12 +509,12 @@ Es sei hier noch bemerkt, daß Disketten auch unter CP/M formatiert werden könn
 Wenn Sie Ihren CPC mit angeschlossenem vortex X-Laufwerk einschalten, dann bekommen Sie unter anderem folgende Meldung:
 
 ```
-(C)1985 VDOS 2.0-X by vortex GmbH
+(C)1986   VDOS 2.11-X by vortex GmbH
 
 Ready
 ```
 
-Sie zeigt uns, daß das X-Laufwerk arbeitet, VDOS 2.0 vorhanden ist und der CPC auf eine Eingabe von uns wartet (signalisiert durch "Ready"). Ich will Ihnen hier kurz zeigen – Sie sollten das eigentlich schon wissen –, wie Sie ein BASIC-Programm sichern, d.h. auf Diskette schreiben, und wie Sie es wieder laden und starten können.
+Sie zeigt uns, daß das X-Laufwerk arbeitet, VDOS 2.11-X vorhanden ist und der CPC auf eine Eingabe von uns wartet (signalisiert durch "Ready"). Ich will Ihnen hier kurz zeigen – Sie sollten das eigentlich schon wissen –, wie Sie ein BASIC-Programm sichern, d.h. auf Diskette schreiben, und wie Sie es wieder laden und starten können.
 
 Geben Sie einfach einmal das folgende kleine Programm ein:
 
@@ -541,11 +545,11 @@ Das Laufwerk wird angehen, das kleine Programm wird gespeichert und schon fertig
 ```
 CAT<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 TEST    .BAS  1K
 
-1K belegt, 1 Dateien, 700K frei
+  1K in   1 Files, 700K frei
 ```
 
 Auf der Diskette finden wir unser `TEST` Programm wieder. Geben Sie nun zum "Beweis" dies hier ein:
@@ -653,12 +657,12 @@ Eingegebene Befehle beziehen sich nun auf Laufwerk A, das 3"-Laufwerk:
 ```
 |DIR<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 TEST    .BAS    TEST    .BIN
 PROGRAMM.BAS    TEST    .BAK
 
-100K belegt, 4 Dateien, 69K frei
+100K in   4 Files,  69K frei
 ```
 
 Möchten wir z.B. sehen, was sich auf der Diskette im X-Laufwerk befindet, dann müssen wir erst einmal auf dieses "umschalten":
@@ -672,13 +676,13 @@ Eingegebene Befehle "wirken" nun auf Laufwerk B, dem X-Laufwerk:
 ```
 |DIR<ENTER>
 
-Laufwerk B: User 0
+Laufwerk B: User  0
 
 PIP     .COM    M80     .COM    VDOS    .MAC
 STAT    .COM    L80     .COM    WS      .COM
 WSMSGS  .OVR    WSOVLY1 .COM
 
-304K belegt, 8 Dateien, 400K frei
+304K in   8 Files, 400K frei
 ```
 
 Sie sehen, daß wir hier wesentlich mehr Speicherplatz zur Verfügung haben.
@@ -781,7 +785,7 @@ Der einfachere der beiden Befehle ist `CAT`. Hier seine Anwendung:
 ```
 CAT<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 | Datei      | Größe | Datei       | Größe |
 |------------|-------|-------------|-------|
@@ -794,7 +798,7 @@ Laufwerk A: User 0
 | MAN    .006 | 1K   | WSMSGS .OVR | 30K  |
 | MAN    .007 | 15K  | WSOVLY1.OVR | 34K  |
 | MAN    .BAK | 15K  |             |      |
-228K belegt, 17 Dateien, 480K frei
+228K in  17 Files, 480K frei
 Ready
 ```
 
@@ -815,12 +819,12 @@ Wir brauchen also einen Befehl, mit dem es möglich ist, selektiv bestimmte Date
 ```
 |DIR,"*.COM"<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 FAST    .COM    PIP     .COM
 STAT    .COM    WS192N  .COM
 
-228K belegt, 4 Dateien, 480K frei
+228K in   4 Files, 480K frei
 ```
 
 Alle Dateien vom Typ `COM` wurden angezeigt.
@@ -828,13 +832,13 @@ Alle Dateien vom Typ `COM` wurden angezeigt.
 ```
 |DIR,"MAN.*"<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 
 MAN     .003    MAN     .004
 MAN     .006    MAN     .005
 MAN     .007    MAN     .BAK
 
-228K belegt, 6 Dateien, 480K frei
+228K in   6 Files, 480K frei
 ```
 
 Es wurden uns alle Dateien mit dem Dateinamen "MAN" angezeigt.
@@ -846,7 +850,7 @@ MAN     .003    MAN     .004
 MAN     .006    MAN     .005
 MAN     .007
 
-228K belegt, 5 Dateien, 480K frei
+228K in   5 Files, 480K frei
 ```
 
 Hier sind nur die Dateien ausgegeben worden, deren Dateiname `MAN` ist und deren Typ 3 Zeichen lang ist, wobei die ersten beiden Zeichen "00" sein müssen und das 3. Zeichen beliebig, aber vorhanden sein muß (eine Datei `MAN.00` wäre nicht angezeigt worden).
@@ -865,7 +869,7 @@ Der Unterschied beider Zeichen wird auch durch folgende Gleichung (nicht mathema
 Wie Sie sicherlich bemerkt haben, kommt bei `CAT` und `|DIR` in der ersten Zeile immer die Meldung:
 
 ```
-Laufwerk A: User 0
+Laufwerk A: User  0
 ```
 
 Was hat es damit auf sich? Ganz einfach: Durch die Angabe `Laufwerk A` wird uns angezeigt, daß hier ein Inhaltsverzeichnis von der Diskette in Laufwerk A ausgegeben wird. Es ist eines von 16 möglichen Inhaltsverzeichnissen. Bei der Entwicklung von VDOS ist daran gedacht worden, daß sich unter Umständen mehrere Benutzer eine einzige Diskette teilen müssen. Damit hier kein Durcheinander entsteht (wem gehört welche Datei), kann die Diskette in bis zu 16 Benutzer-Bereiche (USER-Bereiche) unterteilt werden (siehe dazu den `|SELECT` Befehl). Es ist aber zu beachten, daß die Summe aller Dateien – aus allen USER-Bereichen – nie größer als 128 sein darf und daß die Summe aller Größen der Dateien nie 704 KB überschreitet. In beiden Fällen ist nämlich die Diskette voll.
@@ -902,7 +906,7 @@ Die Datei `PIP.COM` wird als "nur lesbar" markiert. Sie kann also auch nicht meh
 ```
 CAT<ENTER>
 
-Laufwerk A: User 0
+Laufwerk A: User  0
 ```
 
 | Datei      | Größe | Datei       | Größe |
@@ -918,7 +922,7 @@ Laufwerk A: User 0
 | MAN    .BAK | 15K  |             |      |
 
 ```
-228K belegt, 17 Dateien, 480K frei
+228K in  17 Files, 480K frei
 Ready
 ```
 
@@ -929,7 +933,7 @@ Greifen wir ein wenig vor: versuchen Sie einmal die Datei `PIP.COM` zu löschen,
 ```
 |ERA,"PIP.COM"<ENTER>
 
-PIP    .COM nur lesbar
+PIP    .COM hat Schreibschutz
 
 Ready
 ```
@@ -981,6 +985,8 @@ Die folgende Zeile sollte nur bei äußerstem Bewußtsein eingegeben werden, sie
 ```
 
 Auf dieses Wildcard (`*.*`) "passen" alle Dateien, also werden auch alle gelöscht. Also hier bitte immer vorsichtig. Die Fälle, wo Sie ganze Disketten löschen müssen, sind sicherlich auch sehr selten.
+
+Trifft `|ERA` bei einem Wildcard auf eine schreibgeschützte Datei, dann meldet VDOS `<datei> hat Schreibschutz` und bricht ab: Die Dateien, die im Inhaltsverzeichnis davor stehen, sind dann schon gelöscht, alle folgenden bleiben erhalten.
 
 > **(!) Wichtig: VORSICHT!**
 >
@@ -1046,18 +1052,18 @@ Folgende Zeile
 schaltet auf USER-Bereich 6 um. Geben wir jetzt ein `CAT` ein, dann bringt dieses in seiner obersten Zeile die Information:
 
 ```
-Laufwerk A: User 6
+Laufwerk A: User  6
 ```
 
 und listet uns dann die Dateien, die sich in diesem USER-Bereich befinden, auf dem Bildschirm auf.
 
-Außerdem kann neben der USER-Nummer auch noch die Laufwerkskennung (A oder B) mit angegeben werden.
+Außerdem kann neben der USER-Nummer auch noch die Laufwerkskennung (A oder B) mit angegeben werden. Die USER-Nummer muß dabei **vor** der Laufwerkskennung stehen:
 
 ```
-|SELECT,"B5"<ENTER>
+|SELECT,"5B"<ENTER>
 ```
 
-schaltet in USER-Bereich 5 auf Laufwerk B um.
+schaltet in USER-Bereich 5 auf Laufwerk B um. (Bei `|SELECT,"B5"` wird nur auf Laufwerk B umgeschaltet; alles, was hinter der Laufwerkskennung steht, wird ignoriert.)
 
 Geben wir jetzt z.B.
 
@@ -1068,7 +1074,7 @@ CAT<ENTER>
 ein, dann erhalten wir als erste Zeile des "Catalogs":
 
 ```
-Laufwerk B: User 5
+Laufwerk B: User  5
 ```
 
 Macht man hier von der Schreibweise mit dem "Klammeraffen" `@` Gebrauch, dann kann innerhalb eines BASIC-Programms die USER-Nummer und die Laufwerkskennung "dynamisch" angegeben werden:
@@ -1082,6 +1088,18 @@ Macht man hier von der Schreibweise mit dem "Klammeraffen" `@` Gebrauch, dann ka
 ```
 
 Abhängig von der eingegebenen Laufwerkskennung und der USER-Nummer erhalten wir das Inhaltsverzeichnis des entsprechenden Bereichs auf der entsprechenden Diskette.
+
+Gültig sind die USER-Nummern 0 bis 15. Bei einer falschen Eingabe meldet VDOS `Eingabefehler`. Beachten Sie: Steht der Fehler erst hinter der USER-Nummer (z.B. `|SELECT,"3C"`), dann ist der USER-Bereich 3 trotzdem schon eingestellt.
+
+**Die VDOS Befehle |USER und |DRIVE**
+
+VDOS 2.11-X kennt zwei weitere Befehle dazu:
+
+```
+|USER,9<ENTER>
+```
+
+schaltet nur den USER-Bereich um (hier auf 9); die Zahl muß zwischen 0 und 15 liegen, das Laufwerk bleibt unverändert. `|DRIVE` ist nur ein anderer Name für `|SELECT` (`|DRIVE,"B"` wirkt also wie `|SELECT,"B"`).
 
 ---
 
@@ -1203,6 +1221,8 @@ Press REC and PLAY then any key:
 
 die Aufforderung, den Rekorder auf Schreibbetrieb einzustellen.
 
+In VDOS 2.11-X gibt es außerdem die Befehle `|TAPE`, `|TAPE.IN` und `|TAPE.OUT`. Sie sind nur andere Namen für `|CAS`, `|CAS.IN` und `|CAS.OUT` und wirken genau wie diese.
+
 ---
 
 ## Der VDOS Befehl |XMON – der vortex Z80-Monitor
@@ -1262,7 +1282,7 @@ Das Zeichen `@` heißt "Klammeraffe" und wird durch das Drücken der entsprechen
 (kein `<ENTER>`) und meldet sich dann mit
 
 ```
-L:00 T:00 S:41 B:A93E
+L:01  T:02  S:00  B:A8BA  G:00
 >
 ```
 
@@ -1271,35 +1291,38 @@ Der `>` ist das Prompt des Diskettenmonitors. Die einzelnen Einträge in der Sta
 | Eintrag | Bedeutung |
 |---------|-----------|
 | `L:xx` | Laufwerksnummer `xx=00` oder `01` für das logische Laufwerk A oder B. Beim Einsprung enthält `xx` die Nummer des augenblicklich angewählten Laufwerks. |
-| `T:yy` | Spurnummer. Wertebereich `0..27H` (3"-Laufwerk), `0..9FH` (5,25"/3,5") |
-| `S:zz` | Sektornummer. Wertebereich `41H..49H` oder `C1H..C9H` oder `01..08` beim 3"-Laufwerk, `01..09` beim 5,25"/3,5"-Laufwerk. Das Format einer 3"-Diskette wird beim R-Kommando (s.u.) automatisch erkannt und die Sektornummer entsprechend geändert. |
-| `B:abcd` | Pufferadresse für Sektorschreiben/-lesen. Beim Diskmonitorstart steht hier die Adresse des BIOS Hostbuffers (siehe Intern-Teil). |
+| `T:yy` | Spurnummer. Wertebereich `0..27H` (3"-Laufwerk), `0..9FH` (5,25"/3,5"). Beim Einsprung steht hier die erste Spur nach den reservierten Systemspuren. |
+| `S:zz` | Recordnummer (ein Record = 128 Bytes) innerhalb der Spur, von `00` an gezählt. Wertebereich `00` bis Anzahl der Records pro Spur – 1 (z.B. `00..23H` beim vortex X-Laufwerk). Die physikalischen Sektornummern (`41H..49H`, `C1H..C9H`, `01..09`) braucht man nicht anzugeben; das Format einer 3"-Diskette wird automatisch erkannt. |
+| `B:abcd` | Pufferadresse für Recordschreiben/-lesen. Beim Diskmonitorstart steht hier ein Record-Puffer 80H Bytes unterhalb des BIOS Hostbuffers (siehe Intern-Teil). |
+| `G:xx` | CP/M Blocknummer der eingestellten Position. Wird nur außerhalb der reservierten Systemspuren angezeigt. |
 
 Hier nun die Erklärung der einzelnen Diskmonitorbefehle:
 
 | Befehl | Funktion |
 |--------|----------|
-| `>Lxx<ENTER>` | Laufwerksnummer ändern |
-| `>Sxx<ENTER>` | Sektornummer ändern |
+| `>Lxx<ENTER>` | Laufwerksnummer ändern (T, S und B werden dabei auf ihre Startwerte gesetzt) |
+| `>Sxx<ENTER>` | Recordnummer ändern |
 | `>Txx<ENTER>` | Spurnummer ändern |
+| `>Gxx<ENTER>` | auf den Anfang des CP/M Blocks `xx` stellen (T und S werden berechnet). Es können nur die Blöcke `00..FFH` angegeben werden. |
 | `>Babcd<ENTER>` | Pufferadresse setzen |
-| `>R` | Sektor mit den über L, S und T definierten Koordinaten in den Puffer einlesen |
-| `>W` | Pufferinhalt in den Sektor mit den Koordinaten L, S und T schreiben |
+| `>R` | Record mit den über L, T und S definierten Koordinaten in den Puffer einlesen |
+| `>W` | Pufferinhalt in den Record mit den Koordinaten L, T und S schreiben |
 | `>Cabcd<ENTER>` | Inhalt von Speicherstellen im Puffer ändern. Entspricht voll dem Monitorbefehl S (siehe auch dort). |
 | `>Aabcd<ENTER>` | String eingeben (s.o.) |
+| `>Fadresse1,adresse2,wert<ENTER>` | Speicherbereich füllen. Entspricht dem Monitorbefehl F |
 | `>P` | Drucker ein-/ausschalten. Entspricht dem Monitorbefehl P |
-| `>Dabcd<ENTER>/,xx<ENTER>/` | Pufferinhalt als HEX/ASCII Dump auf Bildschirm ausgeben. Optional kann auch noch die Anzahl der Sektoren angegeben werden, die insgesamt gedumpt werden sollen. |
+| `>Dabcd<ENTER>/,xx<ENTER>/` | Pufferinhalt als HEX/ASCII Dump auf Bildschirm ausgeben. Optional kann auch noch die Anzahl der Records angegeben werden, die insgesamt gedumpt werden sollen; sie werden dann nacheinander eingelesen und ausgegeben. |
 | `><ESC>` | Rücksprung in den Monitor |
 
-Alle Eingaben werden sowohl syntaktisch als auch logisch überprüft. Machen Sie einen Eingabefehler, so springt der Diskettenmonitor zurück auf seine Hauptkommandoschleife und meldet sich mit `>>`, um Ihnen den Fehler anzuzeigen – geändert wurde dann selbstverständlich nichts.
+Alle Eingaben werden sowohl syntaktisch als auch logisch überprüft. Machen Sie einen Eingabefehler, so springt der Diskettenmonitor zurück auf seine Hauptkommandoschleife und meldet sich mit `>>`, um Ihnen den Fehler anzuzeigen – geändert wurde dann nichts. (Ausnahme: Bei den Befehlen T und G bleibt die falsche Position stehen, siehe [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x).)
 
 Tritt ein Diskettenfehler beim Lesen oder Schreiben auf, so meldet sich der Diskettenmonitor mit
 
 ```
-ERR:xx
+E:xx
 ```
 
-und springt wieder in die Kommandoschleife. `xx` enthält den Error-Code (siehe Abschnitt "Abfangmöglichkeiten von Diskettenfehlern").
+und springt wieder in die Kommandoschleife. `xx` enthält den Error-Code (hexadezimal) (siehe Abschnitt "Abfangmöglichkeiten von Diskettenfehlern").
 
 ### `B<ENTER>` – Breakpoints ansehen/ändern
 
@@ -1362,6 +1385,8 @@ Die Binär-Datei wird dabei in den originalen Speicher, d.h. in den Speicherbere
 ```
 
 lädt die Datei `TEST.BIN` in den Speicher. Die ermittelte Anfangsadresse ist `2000H`, die Länge `380H` und die Startadresse `2140H`.
+
+Die Datei muß einen Dateikopf (Header) haben, wie ihn z.B. `SAVE "name",B` schreibt. Dateien ohne Header (z.B. unter CP/M erstellte Dateien) werden mit der Länge 0 gemeldet.
 
 ### `Ladresse1,adresse2` – Disassemblieren eines Speicherbereichs
 
@@ -1439,7 +1464,7 @@ Genauso wie der Befehl `P` (siehe oben) ist der Befehl `X` auch ein Schalter. Na
 
 ### `Y` – Oberen ROM anwählen
 
-Geben Sie ein `Y` ein, so liefert Ihnen der Monitor eine Liste aller Erweiterungs-ROMs im System. Diese Liste hat folgenden Aufbau:
+Geben Sie ein `Y` ein, so liefert Ihnen der Monitor eine Liste aller Erweiterungs-ROMs im System (es ist dieselbe Liste, die auch der VDOS Befehl `|ROMCAT` ausgibt, nur ohne die Zeile "Himem"). Diese Liste hat folgenden Aufbau:
 
 ```
 xy rssbvw name
@@ -1465,7 +1490,9 @@ Vac   (ac=aktueller Erweiterungs-ROM)
 
 und der Monitor wartet auf Ihre Eingabe. Sie können nun die Erweiterungs-ROM-Nummer ändern (Eingabe mit `<ENTER>` beenden). Erlaubte Erweiterungs-ROM-Nummern liegen zwischen `00` und `FBH`.
 
-`ac` ist hierbei immer der ROM, den Sie im Adressbereich von `&C000` bis `&FFFF` sehen. Geben Sie die Nummer eines ROMs ein, der nicht existiert, so schaltet der Monitor immer den eingebauten BASIC ROM ein. Möchten Sie den Inhalt des Bildspeichers sehen, so geben Sie eine ROM-Nummer zwischen `FCH` und `FFH` ein.
+`ac` ist hierbei immer der ROM, den Sie im Adressbereich von `&C000` bis `&FFFF` sehen. Geben Sie die Nummer eines ROMs ein, der nicht existiert, so schaltet der Monitor immer den eingebauten BASIC ROM ein. Möchten Sie den Inhalt des Bildspeichers sehen, so geben Sie eine ROM-Nummer zwischen `FCH` und `FFH` ein. Mit `<ESC>` bleibt die alte ROM-Nummer erhalten.
+
+> **(!) Hinweis:** Der Befehl `Y` benutzt denselben Speicherbereich wie die Breakpoints. Breakpoints, die vor `Y` gesetzt wurden, sind danach verloren. Unter CP/M (CP/M Befehl `XMON`) ist `Y` ohne Wirkung; dort sehen Sie im Bereich `&C000` bis `&FFFF` immer den VDOS ROM.
 
 ### `C` – Suchen von Bytefolgen
 
@@ -1483,6 +1510,21 @@ Cabcd<ENTER>,xy<ENTER>
 Die Bytefolge müssen Sie vorher mit dem S- oder A-Befehl (siehe oben) im Speicher ablegen.
 
 Der C-Befehl gibt Ihnen dann eine Liste aller Adressen aus, an denen er die Bytefolge gefunden hat.
+
+### `Z` – RAM-Bank der vortex RAM-Erweiterung wählen
+
+Dieser Befehl ist in VDOS 2.11-X neu. Mit `Z` wählen Sie, welche Bank der vortex RAM-Erweiterung der Monitor bei seinen Speicherzugriffen (D, L, S, ...) einblendet. Der Monitor zeigt die aktuelle Einstellung an und wartet auf Ihre Eingabe (zweistellig, Abschluß mit `<ENTER>`; `<ENTER>` allein behält den Wert bei):
+
+| Eingabe | Bedeutung |
+|---------|-----------|
+| `00` | keine Bank, der normale Speicher des CPC |
+| `01`..`08` | Bank 0 bis 7 der RAM-Erweiterung |
+
+```
+*Z03<ENTER>
+```
+
+blendet die Bank 2 ein.
 
 ---
 
@@ -1506,16 +1548,45 @@ Einschalten können Sie die Background-ROMs selbstverständlich wieder dadurch, 
 
 ---
 
-## Der VDOS Befehl |ROMS
+## Der VDOS Befehl |ROMCAT
 
-Der VDOS Befehl `|ROMS` erstellt eine Tabelle aller Background-ROMs mit Nummern zwischen 0 und 7 folgenden Aussehens:
+Der VDOS Befehl `|ROMCAT` (in VDOS 2.0 hieß er `|ROMS`) gibt zuerst den aktuellen HIMEM-Wert aus und erstellt dann eine Tabelle aller ROMs mit Nummern zwischen 0 und 7 folgenden Aussehens:
 
-| No | Name  | Version |
-|----|-------|---------|
-| 7  | V ROM | 0.31    |
-| …  | …     | …       |
+```
+|ROMCAT<ENTER>
 
-Möchten Sie also mit dem VDOS Befehl `|ROMOFF` arbeiten, so können Sie zuvor mit dem VDOS Befehl `|ROMS` die Nummern der Background-ROMs ermitteln, die Sie abschalten möchten.
+Himem: A677
+...
+05 01 01 21 03 A6FC V ROM
+...
+07 01 00 05 00 A700 CPM ROM
+```
+
+Jede Zeile enthält die ROM-Nummer, den ROM-Typ (`01` = Background-ROM, `80` = BASIC), die ROM Mark-, Versions- und Modifikations-Nummer, die Adresse des Datenbereichs, den sich der ROM reserviert hat (`----` bei ROMs, die keinen haben), und den Namen des ROMs. Für einen leeren Steckplatz wird der eingebaute BASIC ROM angezeigt.
+
+Mit
+
+```
+|ROMCAT,5<ENTER>
+```
+
+werden alle Befehle des ROMs Nummer 5 mit ihren Einsprungadressen aufgelistet. Halten Sie dabei `<ESC>` gedrückt, so hält die Liste an; ein weiteres `<ESC>` bricht sie ab, jede andere Taste setzt sie fort.
+
+Möchten Sie also mit dem VDOS Befehl `|ROMOFF` arbeiten, so können Sie zuvor mit dem VDOS Befehl `|ROMCAT` die Nummern der Background-ROMs ermitteln, die Sie abschalten möchten.
+
+---
+
+## Die VDOS Befehle |FAST, |SLOW und |FRAME
+
+Diese drei Befehle sind in VDOS 2.11-X neu.
+
+`|FAST<ENTER>` beschleunigt die Textausgabe auf dem Bildschirm, ähnlich wie der CP/M Befehl `FAST`. Er wirkt nur im MODE 2; in MODE 0 und MODE 1 bleibt alles beim alten.
+
+`|SLOW<ENTER>` schaltet die schnelle Textausgabe wieder ab (die Firmware-Ausgabe wird wiederhergestellt).
+
+`|FRAME<ENTER>` wartet auf den nächsten Bildrücklauf (wie `MC WAIT FLYBACK` der Firmware), z.B. um flimmerfreie Grafik zu erzeugen.
+
+Alle drei Befehle brauchen keine Parameter; angegebene Parameter werden ignoriert.
 
 ---
 
@@ -1659,14 +1730,16 @@ Schauen wir uns den `|OPEN` einmal genauer an. Offensichtlich wird hier eine rel
 Wenn Sie eine Datei öffnen, die bereits offen ist, dann erhalten wir folgende Meldung:
 
 ```
-Kanal bereits geöffnet
+Kanal bereits offen
 ```
 
 Vergessen Sie einmal den `|OPEN` Befehl und benutzen Sie dann trotzdem den `|PUT` oder den `|GET` Befehl, dann erhalten Sie folgende Meldung:
 
 ```
-Kanal nicht definiert
+Kanal nicht offen
 ```
+
+Die Meldung `Kanal nicht definiert` erhalten Sie, wenn für die Kanalnummer mit `|FILES` kein Puffer reserviert wurde.
 
 ---
 
@@ -1721,8 +1794,10 @@ Hier werden zuerst die Variablen definiert (Zeile 10) und dann wird der Datensat
 Enthält der gelesene Rekord keine Daten, so erhalten wir die Meldung:
 
 ```
-Rekord enthaelt keine Daten
+Record leer
 ```
+
+(In VDOS 2.11-X erscheint diese Meldung nicht: ein solcher Rekord wird als leerer Rekord gelesen, siehe [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x).)
 
 ---
 
@@ -1748,7 +1823,7 @@ Der `|PUT` Befehl kann auch ohne den `@` (Klammeraffen) verwendet werden:
 |PUT,1,15,"Mueller","Koeln","123456"
 ```
 
-Hier werden direkt die drei Worte in den Datensatz mit der Nummer 15 in die Datei auf Kanal 1 weggeschrieben. Es ist natürlich klar – und das gilt auch für den `|GET` Befehl –, daß die Satz-Nummer auch durch eine Variable ersetzt werden kann. So z.B.
+Hier werden direkt die drei Worte in den Datensatz mit der Nummer 15 in die Datei auf Kanal 1 weggeschrieben. (Diese Schreibweise funktioniert in VDOS 2.11-X nur wenige Male hintereinander, dann meldet BASIC `String expression too complex`; benutzen Sie deshalb besser Variablen mit `@`, siehe [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x).) Es ist natürlich klar – und das gilt auch für den `|GET` Befehl –, daß die Satz-Nummer auch durch eine Variable ersetzt werden kann. So z.B.
 
 ```basic
 10 NAME$="" : ORT$="" : TEL$=""
@@ -1764,7 +1839,7 @@ Hier werden direkt die drei Worte in den Datensatz mit der Nummer 15 in die Date
 Durch die Wahl von `REC` kann die Datensatznummer bestimmt werden, in die der Inhalt der drei Variablen geschrieben werden kann. Wenn Sie einmal eine Rekordnummer angeben, die den Rahmen der Datei sprengt, dann erhalten Sie die Meldung:
 
 ```
-Rekordnummer zu gross
+Recordnummer zu gross
 ```
 
 ---
@@ -1782,7 +1857,7 @@ Soll die Benutzung einer relativen Datei ordnungsgemäß ablaufen, dann muß zum
 Schließt die Datei, die auf Kanal 1 geöffnet war. Ist auf diesem Kanal keine Datei vorhanden, dann bekommen Sie die Meldung:
 
 ```
-Kanal nicht geoeffnet
+Kanal nicht offen
 ```
 
 ---
@@ -1948,22 +2023,22 @@ Hier finden Sie eine Liste aller VDOS Fehlermeldungen: Fehlercode und Meldung. A
 | Code | Meldung | Bedeutung |
 |------|---------|-----------|
 | 17 | Drucker nicht bereit | Diese Fehlermeldung kann nur unter CP/M kommen und dort nur immer dann, wenn der Drucker ca. 40 sec nach dem Versuch, ein Zeichen auf ihm auszugeben, immer noch nicht bereit ist. Fehlerquellen sind: Druckerkabel nicht angesteckt, Drucker nicht eingeschaltet, Drucker nicht selektiert. |
-| 10 | Laufwerk d: Diskette wurde gewechselt `<...>` wird geschlossen | Es wurde eine Datei mit `OPENOUT` geöffnet und dann, ohne ein `CLOSEOUT` zu geben, die Diskette gewechselt. |
+| 10 | Laufwerk d: Diskette wurde gewechselt `<...>` wurde geschlossen | Es wurde eine Datei mit `OPENOUT` geöffnet und dann, ohne ein `CLOSEOUT` zu geben, die Diskette gewechselt. |
 | 21 | Laufwerk d: Diskette voll | Die Diskette in Laufwerk `d:` ist voll. |
 | 22 | Laufwerk d: Directory voll | Das Inhaltsverzeichnis der Diskette ist voll. Beachten Sie, daß diese Meldung schon kommen kann, bevor Sie mit z.B. `CAT<ENTER>` auch wirklich 128 Einträge sehen. Grund: Pro 64 KB Daten pro Programm wird ein Directory-Eintrag benötigt. Eine Datei, die z.B. 129 KB groß ist, belegt bereits 3(!) Einträge im Inhaltsverzeichnis. |
 | 23 | `<...>` wurde nicht gefunden | Wird immer dann gemeldet, wenn versucht wird, auf eine Datei zuzugreifen, die im Inhaltsverzeichnis nicht vorhanden ist. Der Fehler kann bei folgenden Befehlen auftauchen: `LOAD`, `SAVE`, `RUN`, `OPENIN`, `OPENOUT`, `|ERA`, `|REN` und `|ATTRIBUT`. |
 | 24 | `<...>` existiert bereits | Es wird versucht, einer Datei eine neue Bezeichnung zu geben, wobei bereits eine andere Datei mit dieser Bezeichnung vorhanden ist. |
-| 25 | `<...>` kann nur gelesen werden | Es wird versucht, eine Datei zu löschen (mit `|ERA` Befehl) bzw. zu beschreiben, die das "nur lesbar" Attribut trägt (mit dem `|ATTRIBUT` Befehl angebracht). |
-| 33 | falsche Eingabe | Es wurde ein Schreibfehler gemacht (Syntax Error), oder das Befehlsformat eines bestimmten Befehls wurde nicht eingehalten (Semantik Error). |
+| 25 | `<...>` hat Schreibschutz | Es wird versucht, eine Datei zu löschen (mit `|ERA` Befehl) bzw. zu beschreiben, die das "nur lesbar" Attribut trägt (mit dem `|ATTRIBUT` Befehl angebracht). |
+| 33 | Eingabefehler | Es wurde ein Schreibfehler gemacht (Syntax Error), oder das Befehlsformat eines bestimmten Befehls wurde nicht eingehalten (Semantik Error). |
 | 39 | Feld zu lang | Die aktuelle Feldlänge ist größer als die im `|FILES` Befehl angegebene. Sie darf nur "kleiner gleich" sein. Diese Meldung kann kommen, wenn: aktuelle Länge in `|OPEN` zu groß ist, Summe der einzelnen Feldlängen in `|FIELD` größer als die in `|OPEN` definierte ist. |
 | 40 | Feld nicht definiert | Es wird versucht, eine Datei auf einem Kanal zu öffnen (mit `|OPEN`), ohne daß zuvor der `|FILES` Befehl eingegeben worden wäre. |
 | 41 | Feld nicht segmentiert | Es wird versucht, mit den `|GET` oder `|PUT` Befehlen zu arbeiten, ohne daß vorher der Rekordpuffer mit `|FIELD` segmentiert wurde. |
-| 42 | Kanal bereits geöffnet | Es wurde versucht, einen bereits mit `|OPEN` geöffneten Kanal nochmals zu öffnen. |
-| 43 | Kanal nicht geöffnet | Es wurde versucht, einen dieser Befehle (`|FIELD`, `|CLOSE`, `|GET` oder `|PUT`) mit einer Datei auf einem nicht geöffneten Kanal durchzuführen. |
+| 42 | Kanal bereits offen | Es wurde versucht, einen bereits mit `|OPEN` geöffneten Kanal nochmals zu öffnen. |
+| 43 | Kanal nicht offen | Es wurde versucht, einen dieser Befehle (`|FIELD`, `|CLOSE`, `|GET` oder `|PUT`) mit einer Datei auf einem nicht geöffneten Kanal durchzuführen. |
 | 44 | Kanalnummer falsch | Es wurde im Zusammenhang mit den Befehlen `|CLOSE`, `|FIELD`, `|OPEN`, `|GET`, `|PUT` oder `|FILES` eine unerlaubte Kanalnummer angegeben. Zulässige Kanalnummern dürfen zwischen 0 und 127 (je einschließlich) liegen. |
-| 45 | Rekordnummer zu gross | VDOS kann maximal 65536 Rekords à 128 Bytes verwalten. Abhängig von der in `|OPEN` definierten aktuellen Rekordpufferlänge ändert sich die maximale Rekordanzahl. Z.B. bei 512 Bytes Puffergröße sind maximal 16384 Rekords verwaltbar. |
+| 45 | Recordnummer zu gross | VDOS kann maximal 65536 Rekords à 128 Bytes verwalten. Abhängig von der in `|OPEN` definierten aktuellen Rekordpufferlänge ändert sich die maximale Rekordanzahl. Z.B. bei 512 Bytes Puffergröße sind maximal 16384 Rekords verwaltbar. |
 | 53 | Kanal nicht definiert | Es wurde versucht, einen Kanal zu öffnen, der zuvor nicht definiert wurde. |
-| 55 | Rekord enthält keine Daten | Es wurde versucht, einen Rekord zu lesen, der nicht mehr in der Blockbelegungstabelle ausgewiesen ist. **Achtung:** Dieser Fehler kann nicht unbedingt dazu benutzt werden, das Ende einer relativen Datei zu testen. Grund: Ist die aktuelle Rekordlänge kleiner als die Blocklänge (4 KB bei vortex Floppies, 1 KB beim 3"-Laufwerk), so gehen mehrere Rekords in einen Block. Ist nun z.B. nur der erste Rekord im letzten in der Blockbelegungstabelle aufgeführten Block noch belegt, so kommt Fehler 55 erst dann, wenn man versucht, einen Rekord im nächsten Block anzusprechen. Bei kleinen Feldlängen kann sich dessen Rekordnummer unter Umständen stark von der des letzten tatsächlich belegten Rekords unterscheiden. Man sollte deshalb immer mit Indexdateien arbeiten, also zusätzlich zur Datendatei eine zweite sogenannte Indexdatei mitführen, in der Datenrecordnummern und sonstige Informationen verwaltet werden. |
+| 55 | Record leer | (Wird von VDOS 2.11-X wegen eines Fehlers nie gemeldet, siehe [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x).) Es wurde versucht, einen Rekord zu lesen, der nicht mehr in der Blockbelegungstabelle ausgewiesen ist. **Achtung:** Dieser Fehler kann nicht unbedingt dazu benutzt werden, das Ende einer relativen Datei zu testen. Grund: Ist die aktuelle Rekordlänge kleiner als die Blocklänge (4 KB bei vortex Floppies, 1 KB beim 3"-Laufwerk), so gehen mehrere Rekords in einen Block. Ist nun z.B. nur der erste Rekord im letzten in der Blockbelegungstabelle aufgeführten Block noch belegt, so kommt Fehler 55 erst dann, wenn man versucht, einen Rekord im nächsten Block anzusprechen. Bei kleinen Feldlängen kann sich dessen Rekordnummer unter Umständen stark von der des letzten tatsächlich belegten Rekords unterscheiden. Man sollte deshalb immer mit Indexdateien arbeiten, also zusätzlich zur Datendatei eine zweite sogenannte Indexdatei mitführen, in der Datenrecordnummern und sonstige Informationen verwaltet werden. |
 | 14 | (kein Meldetext) | Datei nicht geöffnet. Es wurde versucht, mit `CLOSEIN` oder `CLOSEOUT` eine sequentielle Datei zu schließen, die nicht geöffnet war. |
 | 15 | (kein Meldetext) | Physikalisches (tatsächliches) Ende einer sequentiellen Datei wurde erreicht. |
 
@@ -2114,7 +2189,7 @@ Geben Sie jetzt noch folgendes ein:
 ```
 A>AMSDOS<ENTER>
 
-(C)1985   VDOS 2.0-X by vortex GmbH
+(C)1986   VDOS 2.11-X by vortex GmbH
 BASIC 1.1
 
 Ready
@@ -2130,7 +2205,7 @@ das modifizierte CP/M 2.2 Betriebssystem. Es meldet sich jetzt mit der Lademeldu
 
 ```
 CP/M 2.2 - Amstrad Consumer Electronics plc
-44K CP/M vers. 2.2-03/86 vortex GmbH
+44K CP/M vers. 2.2-07/86 vortex GmbH
 
 A>
 ```
@@ -2188,7 +2263,7 @@ A>AMSDOS<ENTER>
 womit wir auf BASIC zurückschalten:
 
 ```
-(C)1985   VDOS 2.0-X by vortex GmbH
+(C)1986   VDOS 2.11-X by vortex GmbH
 BASIC 1.1
 
 Ready
@@ -2203,7 +2278,7 @@ Starten Sie durch die Eingabe von
 das CP/M 2.2 vom vortex Laufwerk. Wir erhalten folgende Lademeldung:
 
 ```
-44K CP/M vers.2.2-03/86 vortex GmbH
+44K CP/M vers.2.2-07/86 vortex GmbH
 
 A>
 ```
@@ -2309,7 +2384,7 @@ das geänderte CP/M 2.2 Betriebssystem vom 3"-Laufwerk. Es meldet sich mit:
 
 ```
 CP/M 2.2 - Amstrad Consumer Electronics plc
-44K CP/M vers. 2.2-03/86 vortex GmbH
+44K CP/M vers. 2.2-07/86 vortex GmbH
 A>
 ```
 
@@ -2443,7 +2518,7 @@ Das CP/M wird vom 3"-Laufwerk von einer modifizierten Kopie der Original Schneid
 X-Laufwerke Benutzerhandbuch VDOS und CP/M   (C)1986 vortex GmbH
 
 CP/M 2.2 - Amstrad Consumer Electronics plc
-44K CP/M vers. 2.2-03/86 vortex GmbH
+44K CP/M vers. 2.2-07/86 vortex GmbH
 
 A>
 ```
@@ -2460,7 +2535,7 @@ Das CP/M wird von der Systemdiskette im X-Laufwerk geladen. (Herstellung dieser 
 ```
 |CPM,2<ENTER>
 
-44K CP/M vers. 2.2-03/86 vortex GmbH
+44K CP/M vers. 2.2-07/86 vortex GmbH
 
 A>
 ```
@@ -3242,7 +3317,7 @@ Ihre Wahl: 5
 Neue Parameter installieren J/N ? J
 CP/M neu starten J/N ? J
 
-44k CP/M vers. 2.2 - 03/86 vortex GmbH
+44k CP/M vers. 2.2 - 07/86 vortex GmbH
 A>
 ```
 
@@ -3374,7 +3449,7 @@ Ihre Wahl: 5
 Neue Parameter installieren J/N ? J
 CP/M neu starten J/N ? J
 
-44k CP/M vers. 2.2 - 03/86   vortex GmbH
+44k CP/M vers. 2.2 - 07/86   vortex GmbH
 
 A>
 ```
@@ -3456,7 +3531,7 @@ Ihre Wahl: 5
 Neue Parameter installieren J/N ? J
 CP/M neu starten J/N ? J
 
-44k CP/M vers. 2.2 - 03/86   vortex GmbH
+44k CP/M vers. 2.2 - 07/86   vortex GmbH
 
 A>
 ```
@@ -3532,7 +3607,7 @@ String weiter eingeben: <ENTER>
 
 [Wahl: 6, dann Wahl: 5, dann installieren und neu starten]
 
-44k CP/M vers. 2.2 - 03/86   vortex GmbH
+44k CP/M vers. 2.2 - 07/86   vortex GmbH
 
 A> ^\@ww^a@@^]ww^M
 ?
@@ -3797,22 +3872,23 @@ Diese zusätzliche Lademeldung zeigt an, daß das 3"-Laufwerk unter CP/M permane
 
 ## VDOS und CP/M intern
 
-Der VDOS 2.0 ROM läßt sich stark vereinfachend in folgende Teile untergliedern:
+Der VDOS 2.11-X ROM läßt sich stark vereinfachend in folgende Teile untergliedern:
 
 ```
 FFFF
 +---------------------+
-| Graphikbefehle      |
-| Fast-Routine        |
-| Monitor             |
-+---------------------+  ca. E900
-| D O S               |  Disk Operating System
-+---------------------+  ca. D000
+| |ROMCAT             |
+| Fast-Routine        |  |FAST, |SLOW, |FRAME
++---------------------+  ca. FD5A
+| Monitor             |  |XMON mit Diskettenmonitor
++---------------------+  ca. EA9E
+| D O S               |  Disk Operating System, RSX-Befehle, Meldungstexte
++---------------------+  ca. CE5B
 | B I O S             |  Basic Input Output System
 +---------------------+  C000
 ```
 
-Alle drei Bereiche stellen mehr oder weniger unabhängige Einheiten dar. Vor allem der Monitor und die Graphikbefehle lassen sich klar abgrenzen, wohingegen zwischen DOS und BIOS enge Beziehungen bestehen.
+Alle drei Bereiche stellen mehr oder weniger unabhängige Einheiten dar. Vor allem der Monitor und die Zusatzbefehle am Ende des ROMs lassen sich klar abgrenzen, wohingegen zwischen DOS und BIOS enge Beziehungen bestehen.
 
 ### BIOS – Basic Input Output System
 
@@ -4100,9 +4176,9 @@ Schreibt man ein Programm, welches später in einen (Background-)ROM "geschossen
 
 Da der gesamte Speicheraufbau (unter BASIC) der CPC's auf diese dynamische Platzreservierung hin ausgerichtet wurde, ist "absoluter" RAM nur in sehr beschränktem Maße verfügbar (der größte Teil des "absoluten" RAM's wird vom BASIC Interpreter und vom Betriebssystem belegt). Einer der wenigen zusammenhängenden, großen, "absoluten" RAM-Bereiche liegt bei `BE80H` (bis zum Stack) und wird auch von der Floppy Firmware benutzt.
 
-> **(!) Wichtig:** Nachfolgend finden Sie die vom VDOS 2.0 ROM belegten RAM-Bereiche ihrer Bedeutung nach aufgelistet. Selbstverständlich sind wir bemüht, diese Bereiche auch bei Revisionen nicht zu ändern, manchmal läßt sich dies jedoch nicht vermeiden. Seien Sie also vorsichtig, bevor Sie nach Lust und Laune "herumpoken" ("Peeken" ist natürlich erlaubt).
+> **(!) Wichtig:** Nachfolgend finden Sie die vom VDOS 2.11-X ROM belegten RAM-Bereiche ihrer Bedeutung nach aufgelistet. Selbstverständlich sind wir bemüht, diese Bereiche auch bei Revisionen nicht zu ändern, manchmal läßt sich dies jedoch nicht vermeiden. Seien Sie also vorsichtig, bevor Sie nach Lust und Laune "herumpoken" ("Peeken" ist natürlich erlaubt).
 
-#### Nicht relokatibler RAM-Bereich des VDOS 2.0 ROM's
+#### Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's
 
 (alle Adressen hexadezimal)
 
@@ -4163,10 +4239,10 @@ Bevor ein Record gelesen oder geschrieben werden kann, müssen dem BIOS über `S
 | BE6D | * | 7 | Event Block für Motor on/off Counter |
 | BE74 |   | 1 | Zwischenspeicher für uPD-Kommando |
 | BE75 |   | 2 | Basisadresse des relokatiblen DOS RAM-Bereichs. Defaultwert: `A700H`, wenn VDOS ROM Nummer 7 |
-| BE77 |   | 2 | Adresse einer DOS-Routine im ROM. Defaultwert: 0 |
+| BE77 |   | 2 | Einmal-Einsprung für die CAS-Funktionen: Ist der Wert nicht 0, so springt der nächste CAS-Aufruf einmal an diese Adresse, danach wird der Wert gelöscht. Defaultwert: 0 |
 | BE79 |   | 2 | Codestring für P-Schutz (wird über RSX Kommando `|CODE` gesetzt) |
 | BE7B |   | 1 | Message Flag: 0 = Fehlermeldungen werden angezeigt, FFH = Fehlermeldungen werden unterdrückt |
-| BE7C |   | 1 | Unter BASIC: EOF-Flag (0 = teste EOF Marker, FFH = kein Test); unter CP/M: FAST-Flag (0 = normal, FFH = verschnellert) |
+| BE7C |   | 1 | Unter BASIC: EOF-Flag (0 = kein Test, nur das physikalische Dateiende zählt (`|DERROR,3`, Defaultwert), FFH = teste EOF Marker `1AH` (`|DERROR,2`)); unter CP/M: FAST-Flag (0 = normal, FFH = verschnellert) |
 | BE7D |   | 2 | Keine Bedeutung unter BASIC; unter CP/M: Basisadresse des relokatiblen RAM-Bereichs |
 | BE7F |   | 1 | Nur X-Laufwerk unter BASIC: Konfigurationsbyte (0 = 5,25" Laufwerk ist Laufwerk A, 1 = 5,25" Laufwerk ist Laufwerk B); wird durch RSX-Kommando `|X` gesetzt |
 
@@ -4185,24 +4261,24 @@ Die folgenden Variablen sind unter BASIC und CP/M sehr unterschiedlich und werde
 | BE98 | 3 | Set DMA DOS Indirection (springt BIOS Routine `SETDMA` an) |
 | BE9B | 3 | Read Record DOS Indirection (springt BIOS Routine `READ` an) |
 | BE9E | 3 | Write Record DOS Indirection (springt BIOS Routine `WRITE` an) |
-| BEA1 | 3 | Position Head DOS Indirection. Einsprung: Akku = logische Spurnummer. Aussprung: Akku = physikalische Spurnummer |
-| BEA2-BEB9 | | Routine für Error Patch |
+| BEA1-BEB6 | | Routine für Error Patch (BASIC 1.0) |
 | BEBA | 2 | Basis Adresse für relative Dateiverwaltung |
 | BEBF | 1 | Nummer des ersten Sektors bei Disk I/O |
 | BEC0 | 1 | Nummer des letzten Sektors bei Disk I/O |
 
-Während des ROM WALKs bis zu dem Zeitpunkt, wo BASIC seinen READY Loop erreicht, haben beim CPC 464 folgende Variablen eine andere Bedeutung:
+Während des ROM WALKs bis zu dem Zeitpunkt, wo BASIC seine Initialisierung beendet hat, haben folgende Variablen eine andere Bedeutung:
 
 | Adresse | Länge | Bedeutung |
 |---------|-------|-----------|
-| BE80 | 6 | Tick Block für Hello Loader |
-| BE86 | 7 | Event Block für Hello Loader |
+| BE24 | 2 | Originaladresse der Firmware-Routine `KM DISARM BREAK` |
+| BE26 | 3 | Faradresse der VDOS-Routine, die `KM DISARM BREAK` abfängt |
+| BE2D | 1 | Anzahl der noch erwarteten `KM DISARM BREAK` Aufrufe (Anfangswert 2) |
 
 **Ein paar Worte zur Bedeutung der DOS Indirections und zur Funktionsweise der Hello Sequenz:**
 
 Die DOS Indirections stellen eine wohldefinierte Schnittstelle zwischen DOS und BIOS dar. Das DOS greift nur über diese Indirections auf das BIOS, also auf die Laufwerke, zu. Die Beschreibung der Übergabeparameter finden Sie im CP/M-Teil bei der Erklärung des BIOS Einsprung-Vektors.
 
-Die Hello-Sequenz, der "Turn Key Mechanismus", in dessen Genuß allerdings nur 464-Besitzer kommen, basiert auf der Idee, das BASIC nach dem ROM WALK abzufangen, bevor es in den READY Loop einspringt. (Der Ready Patch ist nur beim 464/BASIC 1.0 möglich!) Es hat allerdings keinen Sinn, die BASIC READY Indirection bereits beim ROM WALK zu patchen, da BASIC, nachdem es den ROM WALK durchgeführt hat, erst einmal alle BASIC Indirections initialisiert (`C9H`) und somit den Patch löschen würde. Die ROM WALK Routine im VDOS ROM setzt deshalb die READY Indirection auf einen definierten Anfangszustand (`00`) und erzeugt dann einen Ticker, der die BASIC READY Indirection laufend auf `C9H` testet – während dessen läuft der ROM WALK weiter. Wird ein `C9H` gefunden, so wird der READY Patch durchgeführt und der Hello Lader in den RAM nach `BF00H` kopiert. Springt BASIC nun die READY Indirection an, so verzweigt das Programm nach `BF00H` in den Hello Lader. Dieser löscht den Ticker, setzt die READY Indirection auf `C9H`, testet, ob eine Taste gedrückt wurde und bricht ab, wenn dies der Fall war. Wenn nicht, prüft es den Laufwerksstatus von Laufwerk A. Befindet sich keine Diskette im Laufwerk, so wird auch abgebrochen. Liegt eine Diskette im Laufwerk, so sucht der Lader nach der Datei `HELLO.BAS`. Hat er sie gefunden, so lädt er sie ins BASIC Memory und startet.
+Die Hello-Sequenz, der "Turn Key Mechanismus", in dessen Genuß allerdings nur 464-Besitzer kommen, basiert auf der Idee, das BASIC nach dem ROM WALK abzufangen, bevor es in den READY Loop einspringt. (Dies ist nur beim 464/BASIC 1.0 möglich!) Es hat allerdings keinen Sinn, BASIC Indirections bereits beim ROM WALK zu patchen, da BASIC, nachdem es den ROM WALK durchgeführt hat, erst einmal alle BASIC Indirections initialisiert und somit den Patch löschen würde. VDOS 2.11-X fängt deshalb beim ROM WALK den Firmware-Einsprung `KM DISARM BREAK` (`BB48H`) ab, den BASIC 1.0 während seiner Initialisierung zweimal aufruft. Beim ersten Aufruf wird nur die Originalroutine ausgeführt. Beim zweiten Aufruf kopiert VDOS die DOS Indirections und den Error Patch nach `BE8FH`, setzt die BASIC Error Indirection auf den Error Patch und – falls keine Taste gedrückt ist – kopiert den Hello Lader in den RAM nach `BF00H` und startet ihn. Der Lader prüft den Laufwerksstatus von Laufwerk A. Befindet sich keine Diskette im Laufwerk, so wird abgebrochen. Liegt eine Diskette im Laufwerk, so sucht der Lader nach der Datei `HELLO.BAS`. Hat er sie gefunden, so lädt er sie ins BASIC Memory und startet.
 
 #### CP/M
 
@@ -4210,16 +4286,16 @@ Die Hello-Sequenz, der "Turn Key Mechanismus", in dessen Genuß allerdings nur 4
 |---------|--------|-------|-----------|
 | BE80 | * | 3 | Message Flag: 0 = Meldungen an, FFH = Meldungen aus. Einsprung: Akku = neuer Wert. Aussprung: Akku = alter Wert |
 | BE83 | * | 3 | Zeitkonstanten Initialisieren. `HL` = Zeiger auf Parameterbereich |
-| BE86 |   | 3 | Verschiedene Funktionen: Akku = FFH und E = Laufwerksnummer (0,1) -> HL = Zeiger auf DPB Flag Byte; Akku = FEH -> Setzt bzw. löscht FAST Flag; Akku = 1 -> Laufwerk A=3", B=5,25"; Akku = 2 -> Laufwerk A=5,25", B=3"; Akku = 0 -> Laufwerk A=B=5,25" |
+| BE86 |   | 3 | Verschiedene Funktionen: Akku = FFH und E = Laufwerksnummer (0,1) -> HL = Zeiger auf DPB Flag Byte; Akku = FEH -> Setzt bzw. löscht FAST Flag; sonst: Akku = erste Sektornummer des Diskettenformats (wie bei AMSDOS) -> Format für das 3"-Laufwerk wählen |
 | BE89 | * | 3 | Lese einen physikalischen Sektor. Einsprung: HL=Sektorpuffer, C=erster Sektor, B=letzter Sektor (falls Multisektor), E=Laufwerk, D=Spur. Aussprung: Carry=1/Akku=0 erfolgreich, Carry=0/Akku=Error Code |
-| BEAC | * | 3 | Schreibe einen physikalischen Sektor (Parameter wie Lesen) |
-| BEAF | * | 3 | Formatiere eine ganze Spur. Einsprung: HL=Sektorpuffer, E=Laufwerk, D=Spur |
+| BE8C | * | 3 | Schreibe einen physikalischen Sektor (Parameter wie Lesen) |
+| BE8F | * | 3 | Formatiere eine ganze Spur. Einsprung: HL=Sektorpuffer, E=Laufwerk, D=Spur |
 | BE92 | * | 3 | Positioniere den Kopfschlitten. Einsprung: E=Laufwerk, D=Spur |
 | BE95 | * | 3 | Teste den Laufwerksstatus. Einsprung: Akku=Laufwerksnummer. Aussprung: Carry=1 -> Akku=ST3, Carry=0 -> HL=Zeiger in uPD Result Puffer |
 | BE98 | * | 3 | Ändere Retry Count. Einsprung: Akku=neuer Wert. Aussprung: Akku=alter Wert |
 | BE9B | * | 3 | BIOS Entry. Sichert Stack und sorgt für richtige ROM Konfiguration |
-| BE9E |   | 3 | Schalte Motor sofort aus |
-| BEA1 |   | 3 | Position Head Indirection |
+| BE9E |   | 3 | Akku = 0 oder FFH: Registersicherung beim BIOS Entry ein (0) bzw. aus (FFH, schneller, aber IX, IY und der Zweitregistersatz werden verändert). Aussprung: Akku = alter Wert. Jeder andere Wert: Motor sofort ausschalten |
+| BEA1 |   | 3 | SIO initialisieren (SET SIO) |
 | BEA4 | * | 3 | Initialisiere Console Puffer. Einsprung: HL=Zeiger auf String, A=Clear Flag |
 | BEA7 |   | 3 | Eingabe Status SIO 1 |
 | BEAA |   | 3 | Eingabe Status SIO 2 |
@@ -4230,18 +4306,14 @@ Die Hello-Sequenz, der "Turn Key Mechanismus", in dessen Genuß allerdings nur 4
 | BEB9 |   | 3 | Sende Zeichen an SIO 1 |
 | BEBC |   | 3 | Sende Zeichen an SIO 2 |
 
-Die SIO Treiber sind im BIOS noch nicht vorhanden, und so führen die Routinen `BEA7`–`BEBC` in Dummy-Routinen (Schreiben) oder liefern einen EOF Marker (`1AH`, Lesen).
+Die SIO Routinen `BEA7`–`BEBC` steuern in VDOS 2.11-X die vortex RS232C Schnittstelle (Z80 DART) an.
 
 #### Variablen des Diskettenmonitors
 
 | Adresse | Länge | Bedeutung |
 |---------|-------|-----------|
-| BEC1 | 1 | aktuelle Laufwerksnummer (laut L Kommando) |
-| BEC2 | 1 | aktuelle Spurnummer (laut T Kommando) |
-| BEC3 | 1 | aktuelle Sektornummer (laut S Kommando) |
-| BEC4 | 2 | aktuelle Bufferadresse (laut B Kommando) |
-| BEC6 | 1 | interne Variable |
-| BEC7 | 1 | interne Variable |
+| BEC1-BEC7 | | in VDOS 2.11-X nicht benutzt. Der Diskettenmonitor arbeitet direkt mit den BIOS Variablen `BE53` (Laufwerk, L), `BE54` (Spur, T), `BE55` (Record, S) und `BE60` (Pufferadresse, B) |
+| BE00 | 1 | 0 = Monitor, FFH = Diskettenmonitor aktiv |
 | BEC8 | 1 | Nummer des oberen ROM's (laut Y Kommando) |
 | BEC9 | 1 | 0 = Firmware ROM aus, FF = an (laut X Kommando) |
 
@@ -4251,13 +4323,13 @@ Die SIO Treiber sind im BIOS noch nicht vorhanden, und so führen die Routinen `
 |---------|-------|-----------|
 | BECD | 3 | Faradresse für FAST Indirection |
 | BED0 | 3 | Faradresse für Breakpoint |
-| BED3 | 2 | aktuelle Adresse für M Kommando |
+| BED3 | 2 | aktuelle Adresse für S Kommando |
 | BED5 | 2 | aktuelle Adresse für L Kommando |
-| BED7 | 2 | aktuelle Adresse für F Kommando |
+| BED7 | 2 | aktuelle Adresse für F und A Kommando |
 | BED9 | 2 | aktuelle Adresse für D Kommando |
 | BEDD | 1 | CP/M Flag: 0 = VDOS aktiv, FF = CP/M aktiv |
 | BEDE | 2 | Stackpointer beim Einsprung in den Monitor |
-| BEE0 | 1 | interne Variable |
+| BEE0 | 1 | RAM-Bank (laut Z Kommando): 0 = aus, 20H + Banknummer = an |
 | BEE1 | 1 | interne Variable |
 | BEE2 | 1 | Opcode Zwischenspeicher |
 | BEE3 | 2 | Zwischenspeicher für Programmverzweigungen |
@@ -4275,14 +4347,14 @@ Die SIO Treiber sind im BIOS noch nicht vorhanden, und so führen die Routinen `
 | BEFA | 1 | interne Variable |
 | BEFB | 2 | User PC |
 | BEFD | 1 | Distanz bei relativen Z80 Befehlen |
-| BEFE | 1 | internes Flag |
-| BEFF | 1 | internes Flag |
+| BEFE | 1 | internes Flag (Zwischenspeicher des Druckerschalters) |
+| BEFF | 1 | Bit 0 = Drucker an (laut P Kommando); Bits 5-7 = interne Flags des T Kommandos |
 | BF00 | 24 | Breakpoint Arbeitsbereich |
 | BF80 |   | Monitorstack |
 
-#### Relokatibler RAM-Bereich des VDOS 2.0 ROM's
+#### Relokatibler RAM-Bereich des VDOS 2.11-X ROM's
 
-Der relokatible RAM-Bereich des VDOS 2.0 ROM's unterscheidet sich weitgehend von dem des AMSDOS ROM. Alle angegebenen Adressen sind relativ und beziehen sich auf die Basis des RAM-Bereichs. Sitzt der ROM in einer Fassung mit der höchstmöglichen Background ROM Nummer, so ist diese Basis-Adresse `A700H`.
+Der relokatible RAM-Bereich des VDOS ROM's unterscheidet sich weitgehend von dem des AMSDOS ROM. Alle angegebenen Adressen sind relativ und beziehen sich auf die Basis des RAM-Bereichs. Ist AMSDOS vorhanden, so benutzt VDOS 2.11-X den RAM-Bereich des AMSDOS ROMs mit (Basis-Adresse `A700H`) und reserviert keinen eigenen; ohne AMSDOS reserviert es sich `500H` Bytes, die Basis-Adresse ist dann ebenfalls `A700H`. Die Basis-Adresse steht in `BE75`.
 
 | Offset | Länge | Bedeutung |
 |--------|-------|-----------|
@@ -4354,7 +4426,7 @@ Die Header haben folgenden Aufbau (alle Adressen beziehen sich auf den Headeranf
 
 #### Relative Dateiverwaltung
 
-VDOS 2.0 kann gleichzeitig 16 relative Dateien verwalten (16 Kanäle). Die Feldlänge auf jedem Kanal ist beliebig und nur durch den verfügbaren Speicher begrenzt. Die Manipulation des BASIC `HIMEM`'s erfolgt über das RSX Kommando `|FILES`.
+VDOS 2.11-X kann gleichzeitig 16 relative Dateien verwalten (16 Kanäle). Die Feldlänge auf jedem Kanal ist beliebig und nur durch den verfügbaren Speicher begrenzt. Die Manipulation des BASIC `HIMEM`'s erfolgt über das RSX Kommando `|FILES`.
 
 Der BASIC RAM bei aktiver relativer Dateiverwaltung hat folgenden Aufbau:
 
@@ -5006,7 +5078,7 @@ Das an den vortex Controller angeschlossene Laufwerk erfüllt folgende Spezifika
 - `|RESET` – 31
 - ROM WALK – 117, 121
 - `|ROMOFF` – 43
-- `|ROMS` – 43
+- `|ROMCAT` – 43
 - RS232C – 2, 5, 8, 96, 113, 138
 - RSX – 14, 42, 43, 120, 127
 - Random File – 46
@@ -5145,6 +5217,196 @@ VDOS 2.0 löst den Gordischen Knoten folgendermaßen: Der Benutzer entscheidet, 
 - Deshalb gibt es auch noch `|DERROR,3<ENTER>` – dies ist im Übrigen der Defaultzustand nach dem Einschalten oder nach einem RESET und entspricht VDOS 1.0 – hier wird nur auf das physikalische Dateiende (Hard end) getestet, d.h. es gibt kein "EOF met" Problem beim "Mergen", dafür aber Schwierigkeiten bei sequentiellen Textdateien.
 
 Entscheiden Sie also in Ihrem Programm selbst, was Sie weniger stört.
+
+VDOS 2.11-X verhält sich hier genauso wie VDOS 2.0. Beachten Sie aber: Beim Schreiben einer ASCII-Datei schreibt VDOS 2.11-X nur ein einziges `1Ah` hinter die Daten; der Rest des letzten Records enthält alte Daten aus dem Recordpuffer. Mit `|DERROR,3` werden diese alten Daten beim Lesen mit eingelesen (siehe [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x)).
+
+---
+
+## Bekannte Fehler in VDOS 2.11-X
+
+Die folgenden Fehler wurden bei der Analyse von VDOS 2.11-X im Emulator gefunden (2026). Bei jedem Fehler steht, was passiert, wie Sie ihn umgehen können und – für Maschinensprache-Programmierer – wo er im ROM sitzt und wie er sich beheben läßt. Alle Adressen sind hexadezimal und beziehen sich auf den VDOS ROM (`C000H`–`FFFFH`). Die ausführliche Beschreibung mit den Patch-Werten finden Sie in der Datei `bugs.md` des Quelltext-Projekts.
+
+> **(!) Hinweis:** "beobachtet" heißt, der Fehler wurde im Emulator nachvollzogen; "gelesen" heißt, er ergibt sich aus dem Programmcode, wurde aber nicht ausgeführt.
+
+### Relative Dateiverwaltung
+
+#### 1. `|GET` meldet nie "Record leer" (Fehler 55)
+
+Liest man einen Rekord, der in einem noch nicht vorhandenen Teil der Datei liegt (z.B. `|GET,1,2000,@A$` bei einer Datei, die nur Rekord 1 enthält), so erhält man keine Meldung `Record leer`, sondern einen leeren Rekord (beobachtet).
+
+**Abhilfe:** Das Dateiende nicht über Fehler 55 erkennen, sondern – wie schon im Abschnitt "Fehlercodes und ihre Bedeutung" empfohlen – mit einer Indexdatei arbeiten.
+
+**Ursache und Korrektur:** Die BDOS-Routine `random_seek` (Fehlerausgang `E66EH`) setzt den Fehlercode FFH über `set_file_write_flag` (`E108H`). Diese benutzt `SET 7,(HL)`, das das Zero-Flag nicht verändert; dadurch liest `read_random_body` (`E5EDH`) trotzdem und überschreibt den Fehlercode. Korrektur: den Sprung bei `E678H` auf eine kleine Routine im freien Bereich `ED12H` umleiten, die das Bit mit `OR 80H` setzt.
+
+#### 2. `|FILES` mit maximaler Rekordlänge 0 wird angenommen
+
+`|FILES,1,0` wird nicht mit `Eingabefehler` abgewiesen (gelesen).
+
+**Abhilfe:** Immer eine Rekordlänge größer 0 angeben.
+
+**Ursache:** In `rsx_files` (`D197H`) wird der Fehlercode geladen, das Carry-Flag aber nicht gesetzt, so daß der Fehlersprung bei `D1B6H` nicht ausgeführt wird.
+
+#### 3. Kanalnummer ab 128 in `|FILES`: falsche Meldung
+
+Bei einer Kanalnummer von 128 oder mehr meldet `|FILES` `Eingabefehler` statt `Kanalnummer falsch`.
+
+**Ursache:** Die Meldung 44 wird geladen, der Fehlerweg springt aber nach `error_bad_name`, das selbst die Meldung 33 lädt. Korrektur: auf diesem Weg direkt zur Fehlerausgabe mit Meldung 44 springen.
+
+#### 4. Rekordlängen 256, 512, … sind unbrauchbar
+
+`|OPEN,"T.REL",256,1` wird angenommen, aber `|FIELD` meldet danach `Kanal nicht offen` (beobachtet).
+
+**Abhilfe:** Keine Rekordlänge verwenden, die ein Vielfaches von 256 ist (also z.B. 255 oder 257 statt 256).
+
+**Ursache:** Die Prüfung "Kanal offen" (`CF4BH`, in `rsx_field`) testet nur das niederwertige Byte der Rekordlänge.
+
+#### 5. Direkte Strings in `|PUT` erschöpfen die BASIC-Stringverwaltung
+
+`|PUT` mit direkt angegebenen Strings (z.B. `|PUT,1,15,"Mueller","Koeln","123456"`) funktioniert nur wenige Male; beim fünften Aufruf mit zwei Strings meldet BASIC `String expression too complex`, und BASIC kann danach in einem unsauberen Zustand sein (beobachtet).
+
+**Abhilfe:** Die Strings vorher Variablen zuweisen und mit `@` übergeben (`|PUT,1,15,@NAME$,@ORT$,@TEL$`).
+
+**Ursache:** Der Error Patch für BASIC 1.0 (`BEA1H`) gibt die temporären String-Deskriptoren von BASIC nicht wieder frei.
+
+### CAT und |DIR
+
+#### 6. Bis zu 2K zu viel freier Platz
+
+Auf einer ganz vollen 3"-Diskette zeigt `CAT` `167K in   5 Files,   2K frei`; richtig wäre 169K belegt, 0K frei (beobachtet).
+
+**Ursache:** `dir_print_free` (`D7C5H`) zählt im letzten Byte der Blockbelegungstabelle (ALV) auch Bits mit, zu denen es gar keinen Block gibt. Korrektur: im letzten Byte nur die Bits bis zur höchsten Blocknummer zählen.
+
+#### 7. Dateien über 512K werden zu klein angezeigt
+
+Eine Datei von 516K wird bei `CAT` als `512K` angezeigt (die Summenzeile stimmt; beobachtet). Das kann nur auf dem vortex X-Laufwerk vorkommen.
+
+**Ursache:** Bei der Größenberechnung wird nur die Extentnummer berücksichtigt, nicht das Modul-Byte (Byte 14 des Directory-Eintrags).
+
+### Dateien
+
+#### 8. ASCII-Dateien: der Rest des letzten Records wird nicht mit `1AH` gefüllt
+
+VDOS schreibt hinter die Daten einer ASCII-Datei nur ein einziges `1AH`; der Rest des letzten Records enthält alte Daten (beobachtet). Programme, die beim ersten `1AH` aufhören (CP/M, `|DERROR,2`), lesen die Datei richtig. Im Einschaltzustand (`|DERROR,3`) liest BASIC die alten Daten mit: eine Datei mit 1200 Zeilen ergab beim Lesen 1202 Zeilen.
+
+**Abhilfe:** Textdateien mit `|DERROR,2` lesen (siehe Anhang "Das EOF Problem").
+
+**Ursache und Korrektur:** `out_flush_buffer` (`D65CH`) – den Rest des Records mit `1AH` füllen, wie es CP/M und AMSDOS tun.
+
+### |ATTRIBUT und |FORMAT
+
+#### 9. `|ATTRIBUT` mit Wildcard ändert nur die erste passende Datei
+
+`|ATTRIBUT,"*.BAS","R"` schützt nur die erste gefundene BAS-Datei.
+
+**Abhilfe:** Jede Datei einzeln angeben.
+
+**Ursache:** Beim Öffnen wird der gefundene Name in den FCB geschrieben, so daß `set_attributes` (`E1C2H`) danach nur noch diese eine Datei findet.
+
+#### 10. `|ATTRIBUT` mit leerem Namen
+
+Ein leerer Name wird nicht mit `Eingabefehler` abgewiesen, sondern als Name aus Leerzeichen gesucht; die Meldung ist dann `wurde nicht gefunden`.
+
+#### 11. `|FORMAT` prüft nur das niederwertige Byte
+
+`|FORMAT,257` formatiert Laufwerk A, als hätte man `|FORMAT,1` eingegeben (beobachtet).
+
+**Abhilfe:** Nur 1 oder 2 eingeben.
+
+### Schnittstelle und CP/M
+
+#### 12. Beide SIO-Kanäle benutzen eine gemeinsame Kopie von Register 5
+
+Bei der Initialisierung der vortex RS232C Schnittstelle (`dart_init_channel`, `C767H`) wird der Kanal am Bit 0 der Portadresse unterschieden; das ist für `FADDH` und `FADFH` gleich. Dadurch wird nur die Kopie bei `BE02H` geschrieben, `BE01H` bleibt 0 (beobachtet). Zur Zeit ohne Auswirkung, da beide Kanäle denselben Wert benutzen. Korrektur: Bit 1 der Portadresse testen.
+
+#### 13. Warmstart auf schreibgeschützter Diskette meldet "keine CP/M Diskette"
+
+Kann beim Warmstart der Pufferinhalt nicht zurückgeschrieben werden, weil die Diskette schreibgeschützt ist, so meldet VDOS `keine CP/M Diskette - Wiederholen J/N ?`, obwohl die Diskette in Ordnung ist (beobachtet; `wboot_no_cpm_disc`, `C4A3H`).
+
+**Hinweis:** Erscheint diese Meldung bei einer guten CP/M Diskette, so ist die Diskette in Wirklichkeit schreibgeschützt.
+
+### Der Monitor XMON
+
+#### 14. L: `RST 28` (FIRM JUMP) wird falsch disassembliert
+
+Der Disassembler behandelt `RST 28` als 1-Byte-Befehl, obwohl dahinter (wie bei `RST 08`, `10`, `18`) eine Adresse steht: `EF 34 12` wird als `RST 28`, `INC (HL)`, `LD (DE),A` gelistet (beobachtet). Korrektur: Tabellenbyte bei `F5F1H` von `26H` auf `A6H`.
+
+#### 15. L: `OUT (n),A` und `IN A,(n)` zeigen immer `(F4)`
+
+Unabhängig von der Portnummer wird `(F4)` angezeigt (beobachtet). Korrektur: Sprungweite bei `F2D3H` von `57H` auf `02H`.
+
+#### 16. L: `ED 8B` wird als `OTDR` angezeigt
+
+`ED 8B` ist kein gültiger Befehl, wird aber als `OTDR` gelistet (`OTDR` ist `ED BB`; beobachtet). Korrektur: Vergleichswert bei `F1C6H` von `8BH` auf `00H`.
+
+#### 17. L: Schwächen bei IX/IY-Befehlen
+
+- Ungültige Folgen `DD xx` / `FD xx` werden mit einem Byte zu viel angezeigt.
+- `DD CB d 36` (undokumentiert) wird als `SRL` angezeigt.
+- Undokumentierte `DD CB d op` mit Registerziel werden wie die normale `(IX+d)`-Form angezeigt.
+- Die Distanz wird ohne Vorzeichen angezeigt (`(IX+FD)` für die Distanz -3).
+
+#### 18. R: schaltet den Drucker ab
+
+Nach dem Befehl `R` ist die Druckerausgabe (Befehl `P`) ausgeschaltet (beobachtet).
+
+**Abhilfe:** Nach `R` den Drucker mit `P` wieder einschalten.
+
+**Korrektur:** In `xmon_edit_word` (`F9D6H`) die Aufrufe bei `F9DFH` und `F9E3H` auf `xmon_hex_byte` (`FA28H`) statt `FA1BH` richten.
+
+#### 19. A: zerstört den Speicherinhalt bei `0080H`–`0094H`
+
+Nach einem `A`-Befehl stehen bei einem späteren Speicherzugriff des Monitors oberhalb `8000H` im Bereich `0080H`–`0094H` Leerzeichen – unter CP/M ist das der Puffer für die Kommandozeile (beobachtet).
+
+**Ursache:** Der Eingabepuffer des A-Befehls (255 Zeichen) überdeckt die Kopie, die der Monitor von `0080H`–`0094H` anlegt. Korrektur: die Höchstlänge bei `FCD2H` von `FFH` auf `D1H` (209 Zeichen) setzen.
+
+#### 20. T: läuft nach einem `RET` davon
+
+Nach einem schrittweise ausgeführten `RET` wird die Schrittzahl zur Rücksprungadresse; in einer Schleife wie `JR $` verlor der Monitor die Kontrolle (beobachtet). Korrektur: Sprungziel bei `F839H` von `31H` auf `2AH`.
+
+#### 21. T: weitere Schwächen beim Einzelschritt
+
+- Ein bedingtes `RET cc` wird immer ausgeführt, ohne die Bedingung zu prüfen.
+- `RST 00`, `20`, `30`, `38` werden wie ein `RET` behandelt.
+- Bei `RST 08` und `RST 28` wird ein Wort vom Stack des Monitors als nächste Adresse benutzt.
+- Ein Sprung auf sich selbst (`DJNZ $`, `JR $`) wird nie ausgeführt.
+- Nach `RST 10` / `RST 18` läuft das aufgerufene Programm ohne Einzelschritt.
+
+**Abhilfe:** Solche Stellen mit `G` und einem Breakpoint überspringen.
+
+#### 22. M: überlappendes Verschieben nach oben landet ein Byte zu hoch
+
+`M4000,4003,4002` macht aus `11 22 33 44 55 66 77` die Folge `11 22 33 11 22 33 44` statt `11 22 11 22 33 44 77` (beobachtet).
+
+**Abhilfe:** Überlappende Bereiche in zwei Schritten über einen freien Zwischenbereich verschieben.
+
+**Korrektur:** Die fünf Ein-Byte-Befehle bei `F78EH`–`F792H` umstellen: `03 E1 EB 09 EB` → `E1 EB 09 EB 03`.
+
+#### 23. M: Endadresse kleiner als Anfangsadresse
+
+Ist `adresse2` kleiner als `adresse1`, so werden fast 64 KB kopiert (gelesen) – der Rechner stürzt in der Regel ab.
+
+**Abhilfe:** Die Adressen sorgfältig eingeben.
+
+#### 24. O: `<ESC>` während der Adresseingabe läßt die Datei offen
+
+Bricht man den O-Befehl während der Eingabe von Anfangsadresse, Länge oder Startadresse mit `<ESC>` ab, so bleibt die Ausgabedatei offen; auf der Diskette bleibt eine Datei `name.$$$` stehen. Der nächste O-Befehl scheitert dann ohne Meldung, erst der übernächste funktioniert (beobachtet).
+
+**Abhilfe:** Nach einem Abbruch den O-Befehl noch zweimal geben (der erste gibt nur den Ausgabekanal frei) und die übrig gebliebene `.$$$`-Datei später mit `|ERA` löschen.
+
+#### 25. @ (Diskettenmonitor): T und G behalten eine ungültige Position
+
+Gibt man mit `T` oder `G` eine ungültige Spur bzw. einen ungültigen Block ein, so meldet der Diskettenmonitor zwar `>>`, die falsche Position bleibt aber eingestellt (z.B. `TA0` → `>>`, danach liefert `R` den Fehler `E:45`; beobachtet). Ein `W` an dieser Stelle könnte außerhalb des CP/M-Bereichs schreiben.
+
+**Abhilfe:** Nach `>>` die Position mit `T` / `S` bzw. `G` neu und richtig eingeben, bevor `R` oder `W` benutzt wird.
+
+**Ursache:** `xdm_cmd_track` (`EB5FH`) und `xdm_cmd_block` (`EC66H`) speichern die neue Position, bevor sie geprüft wird.
+
+### Weitere Hinweise (keine Fehler)
+
+- **`|CPM` ohne Parameter** startet den CP/M Lader von AMSDOS ohne einen Firmware-Reset. Die RSX-Verkettung zeigt dabei noch in den RAM-Bereich von VDOS, der vom CP/M überschrieben wird. Der CP/M Befehl `AMSDOS` kann dann `BASIC not found` melden. Abhilfe: vorher `|AMSDOS` eingeben oder den Rechner zurücksetzen.
+- **XMON unter CP/M:** `Y` ist dort ohne Wirkung; im Bereich `C000H`–`FFFFH` sehen Sie immer den VDOS ROM.
+- **XMON I** lädt keine Dateien ohne Dateikopf (Header).
+- **Meldungstexte:** Einige Meldungen lauten anders als im Handbuch zu VDOS 2.0: `Kanal bereits offen`, `Kanal nicht offen`, `Recordnummer zu gross`, `Record leer`, `<datei> hat Schreibschutz`, `Eingabefehler`; der Diskettenmonitor meldet `E:xx` statt `ERR:xx`. Diese Ausgabe des Handbuchs verwendet bereits die Texte von VDOS 2.11-X.
 
 ---
 

@@ -35,7 +35,7 @@ needs no decoding hardware.
 | `docs/bugs.md` | all bugs found, with the place, the cause and how to fix them |
 | `docs/todo.md` | open points of the analysis |
 | `docs/VDOSisPD.pdf` | vortex's letter of 13 February 1995 that releases VDOS as public domain |
-| `docs/Vortex_X-Laufwerke_Manual_2.0.md` | the original user manual of the Vortex X drives (German, rev. 1 of 17.4.1986) - it describes **VDOS 2.0**; an edition updated for 2.11-X (with the known bugs) is planned |
+| `docs/Vortex_X-Laufwerke_Manual_2.11-X.md` | the user manual of the Vortex X drives (German), the original of 17.4.1986 for VDOS 2.0 updated for **VDOS 2.11-X**, with a chapter on the known bugs |
 
 The documents mention working files of the analysis (emulator configurations, test discs,
 traces under `output/`, the cpcxray annotation file); those are not part of this repository.
@@ -43,12 +43,13 @@ traces under `output/`, the cpcxray annotation file); those are not part of this
 ## Building
 
 ```
-cd src
-sjasmplus VDOS-2.11-X.asm
+mkdir -p rom
+cd rom
+sjasmplus ../src/VDOS-2.11-X.asm
 ```
 
-This writes `VDOS-2.11-X.rom` (16384 bytes) next to the source; it is identical to the release
-file (SHA-256 `cdff2b5e372c740dd5bdf351b89d9ce955d07ba974b144ba4bc2475afcbfac5b`).
+This writes `rom/VDOS-2.11-X.rom` (16384 bytes); it is identical to the release file (SHA-256
+`cdff2b5e372c740dd5bdf351b89d9ce955d07ba974b144ba4bc2475afcbfac5b`).
 
 ## Using the ROM
 
