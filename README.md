@@ -36,6 +36,8 @@ needs no decoding hardware.
 | `docs/todo.md` | open points of the analysis |
 | `docs/VDOSisPD.pdf` | vortex's letter of 13 February 1995 that releases VDOS as public domain |
 | `docs/Vortex_X-Laufwerke_Manual_2.11-X.md` | the user manual of the Vortex X drives (German), the original of 17.4.1986 for VDOS 2.0 updated for **VDOS 2.11-X**, with a chapter on the known bugs |
+| `docs/Vortex_X-Laufwerke_Manual_EN_2.11-X.md` | the same manual in English (the screen output is still shown in German, as VDOS prints it) |
+| `tools/build_index.py` | builds the linked index of both manuals |
 
 The documents mention working files of the analysis (emulator configurations, test discs,
 traces under `output/`, the cpcxray annotation file); those are not part of this repository.

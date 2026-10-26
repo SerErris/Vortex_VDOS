@@ -4135,7 +4135,7 @@ Bevor wir in medias res steigen, noch ein lästiges, aber umso wichtigeres Detai
 
 #### Funktion 136: `CAS OUT DIRECT` – Einsprung `BC98H`
 
-**Aufgabe:** Sende einen zusammenhängenden Speicherbereich in den Schreibkanal. Funktion 134 und 135 schließen sich wieder gegenseitig aus.
+**Aufgabe:** Sende einen zusammenhängenden Speicherbereich in den Schreibkanal. Funktion 135 und 136 schließen sich wieder gegenseitig aus.
 
 **Einsprung:**
 - `HL` = Zeiger auf Speicherbereich
@@ -4145,7 +4145,7 @@ Bevor wir in medias res steigen, noch ein lästiges, aber umso wichtigeres Detai
 
 **Aussprung:**
 - Es konnte ordnungsgemäß geschrieben werden: `Carry=1 Z=0`
-- Es war keine Datei zum Schreiben offen: `Carry=1 Z=0`
+- Es war keine Datei zum Schreiben offen: `Carry=0 Z=0`
 
 #### Funktion 137: `CAS CATALOG` – Einsprung `BC9BH`
 
@@ -4923,244 +4923,227 @@ Das an den vortex Controller angeschlossene Laufwerk erfüllt folgende Spezifika
 
 ## Stichwortverzeichnis
 
-> **(!) Hinweis:** Die Seitenzahlen beziehen sich auf die Originalausgabe des Handbuchs. In dieser markdown-Version sollten Sie die Inline-Suche oder das Inhaltsverzeichnis benutzen.
+> **(!) Hinweis:** Die Seitenzahlen der gedruckten Originalausgabe sind in dieser Ausgabe durch Verweise auf die Abschnitte ersetzt. Zu jedem Stichwort sind die (höchstens vier) wichtigsten Abschnitte aufgeführt; alle weiteren Stellen finden Sie mit der Suchfunktion.
 
 ### A
 
-- `|A` – 16, 21, 22, 23, 26, 27, 28, 32, 43, 56
-- ALV – 4, 125, 130, 132, 133, 134
-- `|AMSDOS` – 32, 43
-- `|ATTRIBUT` – 26, 27, 28, 56
-- Akku – 113, 114, 116, 120, 122, 123
-- Ausgabekanal – 33, 34, 44
-- Autostart – 60, 89, 94, 95, 97, 98
+- `|A` – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Die VDOS Befehle |A und |B](#die-vdos-befehle-a-und-b), [Der VDOS Befehl |X](#der-vdos-befehl-x)
+- Akkumulator – [DOS – Disk Operating System](#dos--disk-operating-system), [CP/M](#cpm)
+- ALV (Allocation Vektor) – [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm), [Struktur des Disk Parameter Headers (DPH)](#struktur-des-disk-parameter-headers-dph), [Der Allocation Vektor](#der-allocation-vektor)
+- AMSDOS – [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Was ist das, ein DOS?](#was-ist-das-ein-dos), [Der VDOS Befehl |AMSDOS](#der-vdos-befehl-amsdos), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms)
+- `|AMSDOS` – [Der VDOS Befehl |AMSDOS](#der-vdos-befehl-amsdos), [Der VDOS Befehl |ROMOFF](#der-vdos-befehl-romoff), [Weitere Hinweise (keine Fehler)](#weitere-hinweise-keine-fehler)
+- `|ATTRIBUT` – [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut), [|ATTRIBUT und |FORMAT](#attribut-und-format), [9. `|ATTRIBUT` mit Wildcard ändert nur die erste passende Datei](#9-attribut-mit-wildcard-ändert-nur-die-erste-passende-datei), [10. `|ATTRIBUT` mit leerem Namen](#10-attribut-mit-leerem-namen)
+- Ausgabekanal – [Cassetten-Rekorder am CPC](#cassetten-rekorder-am-cpc), [Der VDOS Befehl |DISC](#der-vdos-befehl-disc), [Der VDOS Befehl |CAS](#der-vdos-befehl-cas), [Der VDOS Befehl |DISC.OUT](#der-vdos-befehl-discout)
+- Autostart-String – [Die VDOS Turnkey Funktion](#die-vdos-turnkey-funktion), [4 – Parametersektor kopieren](#4--parametersektor-kopieren), [Beispiel: Autostart-String](#beispiel-autostart-string), [Spezialanwendung: Bildschirmfarben ändern](#spezialanwendung-bildschirmfarben-ändern)
 
 ### B
 
-- `|B` – 16, 21, 22, 23, 29
-- BAK – 20, 21, 24, 25, 27
-- BDOS – 72, 103, 129, 130, 131, 134, 136, 137
-- BIOS – 6, 36, 94, 97, 98, 102, 107, 108, 109, 112, 117, 118, 119, 120, 121, 123, 129, 131, 132, 135
-- BOOTGEN – 17, 64
-- BOS – 43
-- Back Up – 99
-- Background – 43, 116, 117, 125
-- Bdospage – 129, 130
-- Betriebssystem – 1, 2, 5, 6, 12, 13, 14, 15, 16, 17, 32, 44, 57, 61, 62, 66, 67, 68, 70, 81, 100, 107, 108, 116, 117, 130, 134, 136
-- Binär – 19, 20, 39, 40, 58
-- Biospage – 129
-- Blockbelegung – 57, 110, 111, 134
-- Blocking – 107, 108, 119, 133
-- Bootsektor – 68, 102
-- Breakpoint – 35, 37, 38, 40, 123, 124
-- Bug – 35, 135
-- Bytefolgen – 42
+- `|B` – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Die VDOS Befehle |A und |B](#die-vdos-befehle-a-und-b), [Der VDOS Befehl |X](#der-vdos-befehl-x), [Der VDOS Befehl |ERA](#der-vdos-befehl-era)
+- BAK – [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [Die VDOS Befehle |A und |B](#die-vdos-befehle-a-und-b), [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut)
+- BDOS – [TPA](#tpa), [BDOS](#bdos), [BDOS Einsprünge](#bdos-einsprünge), [BDOS Funktionen](#bdos-funktionen)
+- Bekannte Fehler – [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [Der VDOS Befehl |GET](#der-vdos-befehl-get), [Der VDOS Befehl |PUT](#der-vdos-befehl-put), [Bekannte Fehler in VDOS 2.11-X](#bekannte-fehler-in-vdos-211-x)
+- Betriebssystem – [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Was ist das, ein DOS?](#was-ist-das-ein-dos), [Das Laden des CP/M Betriebssystems](#das-laden-des-cpm-betriebssystems), [CP/M unter der Lupe – CP/M-Betriebssystem](#cpm-unter-der-lupe--cpm-betriebssystem)
+- BIOS – [BIOS – Basic Input Output System](#bios--basic-input-output-system), [RAM Variablen von BIOS und DOS](#ram-variablen-von-bios-und-dos), [BIOS](#bios), [Der BIOS Jump Vektor](#der-bios-jump-vektor)
+- BIOS Jump Vektor – [BIOS – Basic Input Output System](#bios--basic-input-output-system), [Der BIOS Jump Vektor](#der-bios-jump-vektor)
+- Block – [DOS – Disk Operating System](#dos--disk-operating-system), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Struktur des Disk Parameter Blocks (DPB)](#struktur-des-disk-parameter-blocks-dpb), [Aufbau eines File Control Blocks (FCB)](#aufbau-eines-file-control-blocks-fcb)
+- Blockbelegungstabelle – [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [DOS – Disk Operating System](#dos--disk-operating-system), [Aufbau eines File Control Blocks (FCB)](#aufbau-eines-file-control-blocks-fcb), [6. Bis zu 2K zu viel freier Platz](#6-bis-zu-2k-zu-viel-freier-platz)
+- Blocking/Deblocking – [BIOS – Basic Input Output System](#bios--basic-input-output-system), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Struktur des Disk Parameter Blocks (DPB)](#struktur-des-disk-parameter-blocks-dpb)
+- BOOTGEN – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format)
+- Bootsektor – [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [`keine CP/M Diskette – Wiederholen J/N`](#keine-cpm-diskette--wiederholen-jn)
+- BOS – [Der VDOS Befehl |ROMOFF](#der-vdos-befehl-romoff)
+- Breakpoint – [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor), [`B<ENTER>` – Breakpoints ansehen/ändern](#benter--breakpoints-ansehenändern), [`Y` – Oberen ROM anwählen](#y--oberen-rom-anwählen), [Variablen des Monitors](#variablen-des-monitors)
+- Bytefolge – [`C` – Suchen von Bytefolgen](#c--suchen-von-bytefolgen)
 
 ### C
 
-- `|CAS` – 33, 34, 39, 44
-- CAS CATALOG – 116
-- CAS IN ABANDON – 114
-- CAS IN CHAR – 114, 115
-- CAS IN CLOSE – 114
-- CAS IN DIRECT – 115
-- CAS IN OPEN – 114
-- CAS OUT ABANDON – 116
-- CAS OUT CLOSE – 115
-- CAS OUT DIRECT – 116
-- CAS OUT OPEN – 115
-- CAS RETURN – 115
-- CAS TEST EOF – 115
-- `|CAS.OUT` – 34
-- CASCOPY – 68, 99, 103, 104
-- CAT – 18, 22, 23, 24, 26, 27, 30, 33, 54, 55, 58, 89, 90, 91, 93, 94, 95, 96, 97, 98, 116, 119, 125, 126, 133, 134
-- CCP – 129, 130, 131
-- `|CLOSE` – 31, 46, 49, 50, 51, 56, 57
-- CLOSEIN – 45, 53, 57
-- CLOSEOUT – 31, 45, 52, 55, 57
-- `|CODE` – 31
-- CP/M 2.2 – 2, 3, 5, 6, 61, 62, 63, 64, 66, 67, 68, 69, 70, 71, 72, 80, 86
-- CP/M 2.2 Systemdiskette – 61, 63, 64, 66, 67, 68
-- CP/M BIOS Vektor – 109
-- CP/M Kaltstart – 109, 135
-- CP/M Warmstart – 109, 135
-- CP/M plus – 2, 3, 4, 5, 6, 61, 66, 67, 68, 69, 71
-- CP/M plus Diskette – 66, 67, 68, 71
-- CP/M-Lader – 88
-- `|CPM` – 60, 61, 62, 64, 66, 67, 68, 70, 71, 72, 73, 76, 81, 102
-- `|CPM,1` – 62, 67, 68, 70, 72, 73
-- `|CPM,2` – 64, 66, 68, 71, 72, 73, 76, 81
-- CRC Fehler – 58
-- CSV – 125, 132, 133, 134, 135
-- CTRL C – 91, 94, 97, 103
-- Cassetten-Rekorder – 33
-- Catalog – 24, 30, 116
-- Centronics – 113
-- Connectoren – 138
+- `|CAS` – [Der VDOS Befehl |CAS](#der-vdos-befehl-cas), [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung)
+- CAS CATALOG – [Funktion 137: `CAS CATALOG` – Einsprung `BC9BH`](#funktion-137-cas-catalog--einsprung-bc9bh)
+- CAS IN ABANDON – [Funktion 127: `CAS IN ABANDON` – Einsprung `BC7DH`](#funktion-127-cas-in-abandon--einsprung-bc7dh)
+- CAS IN CHAR – [Funktion 128: `CAS IN CHAR` – Einsprung `BC80H`](#funktion-128-cas-in-char--einsprung-bc80h), [Funktion 130: `CAS RETURN` – Einsprung `BC86H`](#funktion-130-cas-return--einsprung-bc86h)
+- CAS IN CLOSE – [Funktion 126: `CAS IN CLOSE` – Einsprung `BC7AH`](#funktion-126-cas-in-close--einsprung-bc7ah)
+- CAS IN DIRECT – [Funktion 129: `CAS IN DIRECT` – Einsprung `BC83H`](#funktion-129-cas-in-direct--einsprung-bc83h)
+- CAS IN OPEN – [Funktion 125: `CAS IN OPEN` – Einsprung `BC77H`](#funktion-125-cas-in-open--einsprung-bc77h)
+- CAS OUT ABANDON – [Funktion 134: `CAS OUT ABANDON` – Einsprung `BC92H`](#funktion-134-cas-out-abandon--einsprung-bc92h)
+- CAS OUT CHAR – [Funktion 135: `CAS OUT CHAR` – Einsprung `BC95H`](#funktion-135-cas-out-char--einsprung-bc95h)
+- CAS OUT CLOSE – [Funktion 133: `CAS OUT CLOSE` – Einsprung `BC8FH`](#funktion-133-cas-out-close--einsprung-bc8fh)
+- CAS OUT DIRECT – [Funktion 136: `CAS OUT DIRECT` – Einsprung `BC98H`](#funktion-136-cas-out-direct--einsprung-bc98h)
+- CAS OUT OPEN – [Funktion 132: `CAS OUT OPEN` – Einsprung `BC8CH`](#funktion-132-cas-out-open--einsprung-bc8ch)
+- CAS RETURN – [Funktion 130: `CAS RETURN` – Einsprung `BC86H`](#funktion-130-cas-return--einsprung-bc86h)
+- CAS TEST EOF – [Funktion 131: `CAS TEST EOF` – Einsprung `BC89H`](#funktion-131-cas-test-eof--einsprung-bc89h)
+- `|CAS.IN` – [Der VDOS Befehl |CAS.IN](#der-vdos-befehl-casin), [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout), [`Idateiname.dateityp<ENTER>` – Laden einer Binärdatei von Diskette/Cassette](#idateinamedateitypenter--laden-einer-binärdatei-von-diskettecassette)
+- `|CAS.OUT` – [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout)
+- CASCOPY – [Der CP/M Befehl CASCOPY](#der-cpm-befehl-cascopy), [`Die Directory ist voll!`](#die-directory-ist-voll), [`Geschützte Datei! Kann nicht gelesen werden.`](#geschützte-datei-kann-nicht-gelesen-werden), [`Fehler! CASCOPY wird abgebrochen`](#fehler-cascopy-wird-abgebrochen)
+- Cassettenrekorder – [Cassetten-Rekorder am CPC](#cassetten-rekorder-am-cpc), [Der VDOS Befehl |CAS](#der-vdos-befehl-cas), [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout), [Der CP/M Befehl CASCOPY](#der-cpm-befehl-cascopy)
+- CAT – [Der VDOS Befehl |X](#der-vdos-befehl-x), [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut), [CAT und |DIR](#cat-und-dir)
+- CCP – [CP/M unter der Lupe – CP/M-Betriebssystem](#cpm-unter-der-lupe--cpm-betriebssystem), [Zero Page](#zero-page), [TPA](#tpa), [CCP](#ccp)
+- Centronics – [DOS – Disk Operating System](#dos--disk-operating-system)
+- `|CLOSE` – [Der VDOS Befehl |RESET](#der-vdos-befehl-reset), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |CLOSE](#der-vdos-befehl-close), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- CLOSEIN – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Zwei kleine Anwendungen](#zwei-kleine-anwendungen), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- CLOSEOUT – [Der VDOS Befehl |RESET](#der-vdos-befehl-reset), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Zwei kleine Anwendungen](#zwei-kleine-anwendungen), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- `|CODE` – [Der VDOS Befehl |CODE](#der-vdos-befehl-code), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms)
+- CP/M 2.2 – [Vorwort](#vorwort), [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128)
+- CP/M plus – [Vorwort](#vorwort), [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [Hier noch ein paar Hinweise](#hier-noch-ein-paar-hinweise)
+- `|CPM` – [Die VDOS Turnkey Funktion](#die-vdos-turnkey-funktion), [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [Der VDOS Befehl |CPM](#der-vdos-befehl-cpm)
+- `|CPM,1` – [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [Der VDOS Befehl |CPM,1](#der-vdos-befehl-cpm1), [CP/M mit Ihrem vortex X-Laufwerk](#cpm-mit-ihrem-vortex-x-laufwerk)
+- `|CPM,2` – [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [Hier noch ein paar Hinweise](#hier-noch-ein-paar-hinweise), [Der VDOS Befehl |CPM,2](#der-vdos-befehl-cpm2)
+- CRC Fehler – [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- CSV (Check Size Vektor) – [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm), [Struktur des Disk Parameter Headers (DPH)](#struktur-des-disk-parameter-headers-dph), [Der Check Size Vektor](#der-check-size-vektor)
+- CTRL+C – [Beispiel: Tastaturbelegung](#beispiel-tastaturbelegung), [Beispiel: Autostart-String](#beispiel-autostart-string), [`SYSGEN wurde durch ^C abgebrochen`](#sysgen-wurde-durch-c-abgebrochen), [Der Check Size Vektor](#der-check-size-vektor)
 
 ### D
 
-- DATA-Only – 17, 85, 106
-- `|DERROR` – 54, 55, 58, 59
-- DIN Buchse – 139, 140
-- `|DIR` – 14, 15, 16, 21, 24, 25, 26, 27
-- `|DISC` – 33, 34, 44
-- `|DISC.IN` – 33, 34
-- `|DISC.OUT` – 34
-- DISKTOOL – 17, 64, 65, 66, 68, 69, 83, 84, 86, 87, 88, 105, 106
-- DPB – 118, 122, 125, 132, 133, 137
-- DPH – 118, 125, 132, 133, 136
-- DRI – 2, 9, 19, 40, 55, 62, 69, 118, 119, 129, 134, 137, 140
-- Datei – 2, 6, 12, 14, 15, 16, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 30, 31, 34, 39, 40, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 60, 64, 67, 69, 72, 74, 75, 77, 78, 79, 80, 81, 86, 87, 88, 89, 95, 99, 100, 103, 104, 106, 109, 110, 111, 112, 114, 115, 116, 121, 126, 127, 130, 134
-- Dateibezeichnung – 19, 20, 29, 40, 55, 104, 106
-- Dateiname – 20, 25, 29, 39, 40, 74, 75, 78, 80, 104, 110, 111, 115, 126, 134
-- Dateityp – 20, 39, 40, 75, 100
-- Datenrekorder – 33, 99
-- Deblocking – 107, 108, 119
-- Debugger – 35, 135
-- Directory – 2, 6, 8, 9, 22, 24, 27, 55, 56, 64, 71, 85, 86, 103, 109, 110, 111, 112, 119, 125, 132, 133, 135
-- Disk Parameter – 132, 133
-- Diskettenfehler – 37, 54, 59
-- Diskettenmonitor – 35, 36, 37, 123
+- DATA-Only Format – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [`Diskette hat keine reservierten Systemspuren`](#diskette-hat-keine-reservierten-systemspuren)
+- Datei – [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [DOS – Disk Operating System](#dos--disk-operating-system)
+- Dateiname – [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der CP/M Befehl FILECOPY](#der-cpm-befehl-filecopy), [`Ungültiger Dateiname:`](#ungültiger-dateiname)
+- Dateityp – [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [`Idateiname.dateityp<ENTER>` – Laden einer Binärdatei von Diskette/Cassette](#idateinamedateitypenter--laden-einer-binärdatei-von-diskettecassette), [`Odateiname.dateityp<ENTER>adresse1,länge,adresse2` – Speichern einer Datei](#odateinamedateitypenteradresse1längeadresse2--speichern-einer-datei), [Der CP/M Befehl FILECOPY](#der-cpm-befehl-filecopy)
+- `|DERROR` – [Abfangmöglichkeiten von Diskettenfehlern](#abfangmöglichkeiten-von-diskettenfehlern), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [Anhang: Das EOF Problem](#anhang-das-eof-problem)
+- `|DIR` – [Wie erzeugen wir den senkrechten Strich?](#wie-erzeugen-wir-den-senkrechten-strich), [Die VDOS Befehle |A und |B](#die-vdos-befehle-a-und-b), [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [CAT und |DIR](#cat-und-dir)
+- Directory – [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [`Die Directory ist voll!`](#die-directory-ist-voll), [DOS – Disk Operating System](#dos--disk-operating-system), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms)
+- `|DISC` – [Der VDOS Befehl |DISC](#der-vdos-befehl-disc), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung)
+- `|DISC.IN` – [Der VDOS Befehl |DISC.IN](#der-vdos-befehl-discin), [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout)
+- `|DISC.OUT` – [Der VDOS Befehl |DISC.OUT](#der-vdos-befehl-discout)
+- Diskettenfehler – [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [Abfangmöglichkeiten von Diskettenfehlern](#abfangmöglichkeiten-von-diskettenfehlern), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- Diskettenmonitor – [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor), [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [Variablen des Diskettenmonitors](#variablen-des-diskettenmonitors), [25. @ (Diskettenmonitor): T und G behalten eine ungültige Position](#25--diskettenmonitor-t-und-g-behalten-eine-ungültige-position)
+- DISKTOOL – [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Der CP/M Befehl DISKTOOL](#der-cpm-befehl-disktool), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [`DISKTOOL 1.0 benoetigt unter dem RAM-Karten CP/M aktive System-Vektoren !`](#disktool-10-benoetigt-unter-dem-ram-karten-cpm-aktive-system-vektoren-)
+- DOS Indirections – [BASIC](#basic), [Variablen des Monitors](#variablen-des-monitors)
+- DPB (Disk Parameter Block) – [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm), [Struktur des Disk Parameter Blocks (DPB)](#struktur-des-disk-parameter-blocks-dpb), [Struktur des Disk Parameter Headers (DPH)](#struktur-des-disk-parameter-headers-dph)
+- DPH (Disk Parameter Header) – [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm), [Struktur des Disk Parameter Headers (DPH)](#struktur-des-disk-parameter-headers-dph)
+- `|DRIVE` – [Der VDOS Befehl |SELECT](#der-vdos-befehl-select)
 
 ### E
 
-- EOF – 45, 115, 120, 123, 136
-- EOF Problem – 59, 149
-- `|ERA` – 27, 28, 29, 56
-- Eingabekanal – 33, 34
-- Entwanzer – 35
-- Extension – 20, 67, 110, 126, 130, 134
-- Extent – 110, 111, 132, 134
+- Eingabekanal – [Cassetten-Rekorder am CPC](#cassetten-rekorder-am-cpc), [Der VDOS Befehl |DISC.IN](#der-vdos-befehl-discin), [Der VDOS Befehl |CAS.IN](#der-vdos-befehl-casin)
+- EOF – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Funktion 131: `CAS TEST EOF` – Einsprung `BC89H`](#funktion-131-cas-test-eof--einsprung-bc89h), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Anhang: Das EOF Problem](#anhang-das-eof-problem)
+- EOF Problem – [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [Anhang: Das EOF Problem](#anhang-das-eof-problem), [8. ASCII-Dateien: der Rest des letzten Records wird nicht mit `1AH` gefüllt](#8-ascii-dateien-der-rest-des-letzten-records-wird-nicht-mit-1ah-gefüllt)
+- `|ERA` – [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut), [Der VDOS Befehl |ERA](#der-vdos-befehl-era), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [24. O: `<ESC>` während der Adresseingabe läßt die Datei offen](#24-o-esc-während-der-adresseingabe-läßt-die-datei-offen)
+- Error Patch – [BASIC](#basic), [5. Direkte Strings in `|PUT` erschöpfen die BASIC-Stringverwaltung](#5-direkte-strings-in-put-erschöpfen-die-basic-stringverwaltung)
+- Extension – [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [DOS – Disk Operating System](#dos--disk-operating-system), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms)
+- Extent – [DOS – Disk Operating System](#dos--disk-operating-system), [Struktur des Disk Parameter Blocks (DPB)](#struktur-des-disk-parameter-blocks-dpb), [Aufbau eines File Control Blocks (FCB)](#aufbau-eines-file-control-blocks-fcb)
 
 ### F
 
-- F1-X – siehe X-Laufwerke
-- FAST – 24, 25, 27, 68, 100, 101, 107, 120, 122, 123, 129
-- FCB – 46, 125, 126, 127, 130, 134, 137
-- FDA-1 – 84
-- FDC – 55, 57, 58
-- `|FIELD` – 46, 47, 48, 49, 50, 51, 52, 56, 57
-- FILECOPY – 68, 72, 73, 74, 75, 76, 77, 78, 79, 83, 106
-- `|FILES` – 46, 47, 48, 49, 50, 51, 52, 56, 57
-- `|FORMAT` – 15, 16, 18, 28
-- Fehlerbyte – 58
-- Fehlercode – 54, 55, 57, 58
-- File – 19, 46, 47, 48, 49, 50, 51, 52, 55, 56, 57, 68, 72, 73, 74, 75, 76, 77, 78, 79, 83, 104, 106, 109, 112, 114, 115, 116, 125, 126, 127, 130, 134, 137
-- Firmware ROM – 41, 123
-- Floppy Disk Station – 1, 12
+- F1-X / M1-X – siehe X-Laufwerk
+- `|FAST` – [Die VDOS Befehle |FAST, |SLOW und |FRAME](#die-vdos-befehle-fast-slow-und-frame), [VDOS und CP/M intern](#vdos-und-cpm-intern)
+- FAST (CP/M Befehl) – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut), [Die VDOS Befehle |FAST, |SLOW und |FRAME](#die-vdos-befehle-fast-slow-und-frame), [Der CP/M Befehl FAST](#der-cpm-befehl-fast)
+- FCB (File Control Block) – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Zero Page](#zero-page), [Aufbau eines File Control Blocks (FCB)](#aufbau-eines-file-control-blocks-fcb)
+- FDC – [Abfangmöglichkeiten von Diskettenfehlern](#abfangmöglichkeiten-von-diskettenfehlern), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- Fehlercode – [Abfangmöglichkeiten von Diskettenfehlern](#abfangmöglichkeiten-von-diskettenfehlern), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [1. `|GET` meldet nie "Record leer" (Fehler 55)](#1-get-meldet-nie-record-leer-fehler-55), [2. `|FILES` mit maximaler Rekordlänge 0 wird angenommen](#2-files-mit-maximaler-rekordlänge-0-wird-angenommen)
+- Fehlermeldung – [Abfangmöglichkeiten von Diskettenfehlern](#abfangmöglichkeiten-von-diskettenfehlern), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [Beispiel: Autostart-String](#beispiel-autostart-string), [CP/M Fehlermeldungen und ihre eventuelle Beseitigung](#cpm-fehlermeldungen-und-ihre-eventuelle-beseitigung)
+- `|FIELD` – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |FIELD](#der-vdos-befehl-field), [Der VDOS Befehl |GET](#der-vdos-befehl-get), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- FILECOPY – [Der CP/M Befehl FILECOPY](#der-cpm-befehl-filecopy), [Beispiel](#beispiel), [Der CP/M Befehl DISKTOOL](#der-cpm-befehl-disktool), [`FILECOPY 3.0 benoetigt unter dem RAM-Karten CP/M aktive System-Vektoren !`](#filecopy-30-benoetigt-unter-dem-ram-karten-cpm-aktive-system-vektoren-)
+- `|FILES` – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |FILES](#der-vdos-befehl-files), [2. `|FILES` mit maximaler Rekordlänge 0 wird angenommen](#2-files-mit-maximaler-rekordlänge-0-wird-angenommen), [3. Kanalnummer ab 128 in `|FILES`: falsche Meldung](#3-kanalnummer-ab-128-in-files-falsche-meldung)
+- Firmware ROM – [`X` – Firmware ROM ein/ausschalten](#x--firmware-rom-einausschalten), [Variablen des Diskettenmonitors](#variablen-des-diskettenmonitors)
+- `|FORMAT` – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Starten und Sichern eines BASIC-Programms](#starten-und-sichern-eines-basic-programms), [|ATTRIBUT und |FORMAT](#attribut-und-format), [11. `|FORMAT` prüft nur das niederwertige Byte](#11-format-prüft-nur-das-niederwertige-byte)
+- Formatieren – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [2 – Komplettkopie erstellen](#2--komplettkopie-erstellen)
+- `|FRAME` – [Die VDOS Befehle |FAST, |SLOW und |FRAME](#die-vdos-befehle-fast-slow-und-frame), [VDOS und CP/M intern](#vdos-und-cpm-intern)
 
 ### G
 
-- `|GET` – 15, 46, 48, 49, 50, 51, 52, 56, 57
+- `|GET` – [Der VDOS Befehl |FIELD](#der-vdos-befehl-field), [Der VDOS Befehl |GET](#der-vdos-befehl-get), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [1. `|GET` meldet nie "Record leer" (Fehler 55)](#1-get-meldet-nie-record-leer-fehler-55)
 
 ### H
 
-- HEX/ASCII – 35, 37, 38
-- HIMEM – 46, 127
-- Hardware – 12, 107, 108, 117, 131, 138
-- Hello-Datei – 60
-- Hostbuffer – 36, 120
+- HELLO.BAS – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut), [Die VDOS Turnkey Funktion](#die-vdos-turnkey-funktion)
+- HEX/ASCII – [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor), [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [`Dadresse1,adresse2<ENTER>` – Auflisten in HEX/ASCII Form](#dadresse1adresse2enter--auflisten-in-hexascii-form)
+- HIMEM – [Der VDOS Befehl |ROMCAT](#der-vdos-befehl-romcat), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Relative Dateiverwaltung](#relative-dateiverwaltung)
+- Hostbuffer – [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm)
 
 ### I
 
-- I/O Byte – 89, 90, 91, 93, 94, 95, 96, 97, 98, 129, 137
-- ID-Feld – 58
-- INPUT#9 – 45, 52
-- INSTALL – 14, 60, 68, 77, 78, 81, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 102, 104, 105, 107
-- Indirection – 120, 121, 123
+- I/O Byte – [Beispiel: Floppy Disk Zeitkonstanten ändern](#beispiel-floppy-disk-zeitkonstanten-ändern), [Beispiel: Tastaturbelegung](#beispiel-tastaturbelegung), [Beispiel: Autostart-String](#beispiel-autostart-string), [BDOS Funktionen](#bdos-funktionen)
+- INPUT#9 – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Zwei kleine Anwendungen](#zwei-kleine-anwendungen)
+- INSTALL – [Beispiel](#beispiel), [Der CP/M Befehl INSTALL](#der-cpm-befehl-install), [Beispiel: Tastaturbelegung](#beispiel-tastaturbelegung), [`INSTALL wird abgebrochen, da Parametersector nicht lesbar!`](#install-wird-abgebrochen-da-parametersector-nicht-lesbar)
+
+### K
+
+- Kanal – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |FILES](#der-vdos-befehl-files), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [12. Beide SIO-Kanäle benutzen eine gemeinsame Kopie von Register 5](#12-beide-sio-kanäle-benutzen-eine-gemeinsame-kopie-von-register-5)
+- KM DISARM BREAK – [BASIC](#basic)
+
+### O
+
+- `|OPEN` – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |OPEN](#der-vdos-befehl-open), [Der VDOS Befehl |GET](#der-vdos-befehl-get), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+
+### P
+
+- `|PUT` – [Der VDOS Befehl |FIELD](#der-vdos-befehl-field), [Der VDOS Befehl |PUT](#der-vdos-befehl-put), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [5. Direkte Strings in `|PUT` erschöpfen die BASIC-Stringverwaltung](#5-direkte-strings-in-put-erschöpfen-die-basic-stringverwaltung)
 
 ### R
 
-- RAM Variablen – 117
-- RAM-Karte – 43, 66, 106
-- `|REN` – 29, 56
-- `|RESET` – 31
-- ROM WALK – 117, 121
-- `|ROMOFF` – 43
-- `|ROMCAT` – 43
-- RS232C – 2, 5, 8, 96, 113, 138
-- RSX – 14, 42, 43, 120, 127
-- Random File – 46
-- Rekordpuffer – 46, 47, 48, 49, 56, 57
-- Relative Datei – 2, 12, 45, 121, 127
-- Reservierte Spuren – 16, 85, 86
-- Reset – 6, 31, 32, 43, 60, 100, 101, 137
-- Rücksetzen – 31, 32
+- RAM Variablen – [RAM Variablen von BIOS und DOS](#ram-variablen-von-bios-und-dos), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#relokatibler-ram-bereich-des-vdos-211-x-roms), [Der RAM unter CP/M](#der-ram-unter-cpm)
+- RAM-Bank – [`Z` – RAM-Bank der vortex RAM-Erweiterung wählen](#z--ram-bank-der-vortex-ram-erweiterung-wählen), [Variablen des Monitors](#variablen-des-monitors)
+- RAM-Karte – [`Z` – RAM-Bank der vortex RAM-Erweiterung wählen](#z--ram-bank-der-vortex-ram-erweiterung-wählen), [CPC464, CPC664 mit X-Laufwerk und vortex RAM-Karte](#cpc464-cpc664-mit-x-laufwerk-und-vortex-ram-karte), [`DISKTOOL 1.0 benoetigt unter dem RAM-Karten CP/M aktive System-Vektoren !`](#disktool-10-benoetigt-unter-dem-ram-karten-cpm-aktive-system-vektoren-), [`FILECOPY 3.0 benoetigt unter dem RAM-Karten CP/M aktive System-Vektoren !`](#filecopy-30-benoetigt-unter-dem-ram-karten-cpm-aktive-system-vektoren-)
+- Record leer – [Der VDOS Befehl |GET](#der-vdos-befehl-get), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [1. `|GET` meldet nie "Record leer" (Fehler 55)](#1-get-meldet-nie-record-leer-fehler-55), [Weitere Hinweise (keine Fehler)](#weitere-hinweise-keine-fehler)
+- Rekord – [Cassetten-Rekorder am CPC](#cassetten-rekorder-am-cpc), [Zwei kleine Anwendungen](#zwei-kleine-anwendungen), [DOS – Disk Operating System](#dos--disk-operating-system), [1. `|GET` meldet nie "Record leer" (Fehler 55)](#1-get-meldet-nie-record-leer-fehler-55)
+- Rekordpuffer – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |FILES](#der-vdos-befehl-files), [Der VDOS Befehl |FIELD](#der-vdos-befehl-field), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- Relative Datei – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Der VDOS Befehl |FILES](#der-vdos-befehl-files), [Relative Dateiverwaltung](#relative-dateiverwaltung), [Relative Dateiverwaltung](#relative-dateiverwaltung-1)
+- `|REN` – [Der VDOS Befehl |REN](#der-vdos-befehl-ren), [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung)
+- Reservierte Spuren – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [`Diskette hat keine reservierten Systemspuren`](#diskette-hat-keine-reservierten-systemspuren)
+- Reset – [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Der VDOS Befehl |RESET](#der-vdos-befehl-reset), [Der VDOS Befehl |AMSDOS](#der-vdos-befehl-amsdos), [BDOS Funktionen](#bdos-funktionen)
+- `|RESET` – [Der VDOS Befehl |RESET](#der-vdos-befehl-reset)
+- ROM WALK – [`Y` – Oberen ROM anwählen](#y--oberen-rom-anwählen), [Funktion 137: `CAS CATALOG` – Einsprung `BC9BH`](#funktion-137-cas-catalog--einsprung-bc9bh), [RAM Variablen von BIOS und DOS](#ram-variablen-von-bios-und-dos), [BASIC](#basic)
+- `|ROMCAT` – [`Y` – Oberen ROM anwählen](#y--oberen-rom-anwählen), [Der VDOS Befehl |ROMCAT](#der-vdos-befehl-romcat), [VDOS und CP/M intern](#vdos-und-cpm-intern)
+- `|ROMOFF` – [Der VDOS Befehl |ROMOFF](#der-vdos-befehl-romoff), [Der VDOS Befehl |ROMCAT](#der-vdos-befehl-romcat)
+- RS232C – [Vorwort](#vorwort), [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Inbetriebnahme CPC464+DDI-1 mit X-Laufwerk](#inbetriebnahme-cpc464ddi-1-mit-x-laufwerk), [RS 232C Connector](#rs-232c-connector)
+- RSX – [Grundlagen](#grundlagen), [`Y` – Oberen ROM anwählen](#y--oberen-rom-anwählen), [Der VDOS Befehl |ROMOFF](#der-vdos-befehl-romoff), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms)
 
 ### S
 
-- SAVE – 18, 19, 20, 31, 34, 40, 56, 60, 62, 80, 130
-- `|SELECT` – 26, 28, 29, 30
-- SIO – 2, 8, 9, 12, 20, 42, 43, 52, 67, 91, 93, 104, 110, 112, 113, 117, 123, 126, 130, 134, 137, 138
-- SYSGEN – 17, 62, 63, 64, 68, 81, 82, 88, 103
-- Schreib/Lesekopf – 32, 90
-- Segment – 47, 48, 49, 52, 56
-- Sektor – 15, 16, 17, 36, 37, 58, 65, 68, 81, 83, 85, 86, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 102, 104, 105, 108, 109, 119, 120, 121, 122, 123, 133
-- Sektorgröße – 108
-- Sektornummer – 16, 17, 36, 108, 119, 123
-- Sequentielle Datei – 44, 45
-- Software – 1, 2, 16, 17, 70, 107, 112, 113
-- Spuren – 10, 15, 16, 17, 32, 62, 65, 70, 81, 82, 83, 85, 86, 88, 105, 106, 110, 129, 131, 132, 133, 141
-- Stepper – 90
-- Steprate – 89, 90, 118, 119, 128
-- Streamnummer – 112
-- Stringvariablen – 46, 47
-- Systemdiskette – 61, 63, 64, 65, 66, 67, 68, 70, 71, 81, 102
-- Systemformat – 16, 85
-- Systemspuren – 17, 62, 65, 81, 82, 83, 85, 88, 105, 106, 131, 132
+- SAVE – [Starten und Sichern eines BASIC-Programms](#starten-und-sichern-eines-basic-programms), [Was ist überhaupt eine Datei?](#was-ist-überhaupt-eine-datei), [Der VDOS Befehl |CODE](#der-vdos-befehl-code), [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout)
+- Schreibschutz – [`Laufwerk d: Diskette hat Schreibschutz – Wiederholen J/N ?`](#laufwerk-d-diskette-hat-schreibschutz--wiederholen-jn-), [`Diskette hat Schreibschutz - Wiederholen J/N ?`](#diskette-hat-schreibschutz---wiederholen-jn-), [`Laufwerk d: Diskette hat Schreibschutz - Wiederholen J/N ?`](#laufwerk-d-diskette-hat-schreibschutz---wiederholen-jn-), [13. Warmstart auf schreibgeschützter Diskette meldet "keine CP/M Diskette"](#13-warmstart-auf-schreibgeschützter-diskette-meldet-keine-cpm-diskette)
+- Sektor – [Der CP/M Befehl SYSGEN](#der-cpm-befehl-sysgen), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [BIOS – Basic Input Output System](#bios--basic-input-output-system), [Struktur des Disk Parameter Blocks (DPB)](#struktur-des-disk-parameter-blocks-dpb)
+- `|SELECT` – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ERA](#der-vdos-befehl-era), [Der VDOS Befehl |SELECT](#der-vdos-befehl-select)
+- Sequentielle Datei – [Was ist das, ein DOS?](#was-ist-das-ein-dos), [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung), [Zwei kleine Anwendungen](#zwei-kleine-anwendungen), [Anhang: Das EOF Problem](#anhang-das-eof-problem)
+- SIO – [CP/M](#cpm), [X-Laufwerke](#x-laufwerke), [12. Beide SIO-Kanäle benutzen eine gemeinsame Kopie von Register 5](#12-beide-sio-kanäle-benutzen-eine-gemeinsame-kopie-von-register-5)
+- `|SLOW` – [Die VDOS Befehle |FAST, |SLOW und |FRAME](#die-vdos-befehle-fast-slow-und-frame), [VDOS und CP/M intern](#vdos-und-cpm-intern)
+- Spur – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Der VDOS Befehl |AMSDOS](#der-vdos-befehl-amsdos), [Der CP/M Befehl SYSGEN](#der-cpm-befehl-sysgen), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette)
+- Steprate – [Beispiel: Floppy Disk Zeitkonstanten ändern](#beispiel-floppy-disk-zeitkonstanten-ändern), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Struktur des Zeitkonstanten-Bereichs](#struktur-des-zeitkonstanten-bereichs)
+- Stringvariable – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung)
+- SYSGEN – [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Der CP/M Befehl SYSGEN](#der-cpm-befehl-sysgen), [3 – CP/M-System kopieren](#3--cpm-system-kopieren), [`SYSGEN wurde durch ^C abgebrochen`](#sysgen-wurde-durch-c-abgebrochen)
+- Systemdiskette – [X-Laufwerke am CPC464 mit DDI-1, CPC664 und CPC6128](#x-laufwerke-am-cpc464-mit-ddi-1-cpc664-und-cpc6128), [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [Der VDOS Befehl |CPM](#der-vdos-befehl-cpm)
+- Systemformat – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette)
+- Systemspuren – [`@` – Diskettenmonitor starten](#--diskettenmonitor-starten), [Erzeugen einer vortex CP/M 2.2 Systemdiskette](#erzeugen-einer-vortex-cpm-22-systemdiskette), [Der CP/M Befehl SYSGEN](#der-cpm-befehl-sysgen), [`Diskette hat keine reservierten Systemspuren`](#diskette-hat-keine-reservierten-systemspuren)
 
 ### T
 
-- TPA – 69, 129, 130
-- Tracer – 35
-- Track – 10, 15, 118, 119, 120, 139
-- Transient – 81, 83, 89, 100, 130
-- Treiber – 107, 108, 123
-- Turnkey – 6, 60
+- `|TAPE` – [Der VDOS Befehl |CAS.OUT](#der-vdos-befehl-casout)
+- TPA – [Hier noch ein paar Hinweise](#hier-noch-ein-paar-hinweise), [TPA](#tpa), [CCP](#ccp)
+- Turnkey – [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Die VDOS Turnkey Funktion](#die-vdos-turnkey-funktion)
 
 ### U
 
-- µPD 765 – 57, 118
-- USER – 14, 16, 18, 21, 24, 25, 26, 27, 28, 29, 30, 72, 73, 74, 76, 78, 110, 124, 125, 126, 137
-- USER Bereiche – 26
+- `|USER` – [Der VDOS Befehl |SELECT](#der-vdos-befehl-select)
+- USER-Bereich – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ERA](#der-vdos-befehl-era), [Der VDOS Befehl |SELECT](#der-vdos-befehl-select), [Der CP/M Befehl FILECOPY](#der-cpm-befehl-filecopy)
 
 ### V
 
-- VDOS 2.0 – 2, 17, 62, 64, 107, 117, 118, 125, 131
-- VDOS Modul – 5, 7, 8, 9
-- Vendorformat – 16, 17, 85
+- Vendorformat – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette)
 
 ### W
 
-- WBOOT – 109, 135
-- WRITE#9 – 45
-- Wanze – 35
-- Wildcard – 25, 26, 28, 29, 74, 75, 78
+- WBOOT (Warmstart) – [BIOS – Basic Input Output System](#bios--basic-input-output-system), [Zero Page](#zero-page), [Der BIOS Jump Vektor](#der-bios-jump-vektor), [13. Warmstart auf schreibgeschützter Diskette meldet "keine CP/M Diskette"](#13-warmstart-auf-schreibgeschützter-diskette-meldet-keine-cpm-diskette)
+- Wildcard – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ERA](#der-vdos-befehl-era), [Der CP/M Befehl FILECOPY](#der-cpm-befehl-filecopy), [9. `|ATTRIBUT` mit Wildcard ändert nur die erste passende Datei](#9-attribut-mit-wildcard-ändert-nur-die-erste-passende-datei)
+- WRITE#9 – [Relative und Sequentielle Dateiverwaltung](#relative-und-sequentielle-dateiverwaltung)
 
 ### X
 
-- `|X` – 16, 18, 22, 23, 35, 41, 71, 120
-- `|XMON` – 35, 41
-- XMON – 35, 36, 39, 41, 68, 80
-- XPATCH30 – 67, 68
+- `|X` – [Der VDOS Befehl |FORMAT](#der-vdos-befehl-format), [Starten und Sichern eines BASIC-Programms](#starten-und-sichern-eines-basic-programms), [Der VDOS Befehl |X](#der-vdos-befehl-x), [Der VDOS Befehl |CPM,2](#der-vdos-befehl-cpm2)
+- X-Laufwerk – [vortex X-Laufwerke auf einen Blick](#vortex-x-laufwerke-auf-einen-blick), [Inbetriebnahme CPC464+DDI-1 mit X-Laufwerk](#inbetriebnahme-cpc464ddi-1-mit-x-laufwerk), [Inbetriebnahme CPC664/CPC6128 mit X-Laufwerk](#inbetriebnahme-cpc664cpc6128-mit-x-laufwerk), [X-Laufwerke am CPC464 mit DDI-1, CPC664 und CPC6128](#x-laufwerke-am-cpc464-mit-ddi-1-cpc664-und-cpc6128)
+- `|XMON` – [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor), [`X` – Firmware ROM ein/ausschalten](#x--firmware-rom-einausschalten), [VDOS und CP/M intern](#vdos-und-cpm-intern)
+- XMON (CP/M Befehl) – [`Idateiname.dateityp<ENTER>` – Laden einer Binärdatei von Diskette/Cassette](#idateinamedateitypenter--laden-einer-binärdatei-von-diskettecassette), [Der CP/M Befehl XMON](#der-cpm-befehl-xmon), [Der Monitor XMON](#der-monitor-xmon), [Weitere Hinweise (keine Fehler)](#weitere-hinweise-keine-fehler)
+- XPATCH30 – [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128)
 
 ### Z
 
-- Z80 – 2, 4, 12, 35, 39, 41, 68, 80, 108, 113, 124
-- Z80 Register – 108, 113
-- Zero Page – 129
-- Ziel – 12, 15, 26, 63, 65, 66, 70, 72, 73, 74, 75, 76, 77, 79, 81, 82, 85, 86, 87, 88, 89, 97, 105, 106, 112, 114, 115
-- Ziel-Laufwerk – 65, 72, 73, 74, 76, 87, 88, 89
-- Zieldiskette – 63, 66, 81, 82, 85, 86, 87, 105, 106
-- Zugriff – 12, 46, 52, 54, 63, 90, 108, 109, 112, 118, 119
+- Z80 – [Vorwort](#vorwort), [Wichtige Hinweise](#wichtige-hinweise), [Was ist das, ein DOS?](#was-ist-das-ein-dos), [Der VDOS Befehl |XMON – der vortex Z80-Monitor](#der-vdos-befehl-xmon--der-vortex-z80-monitor)
+- Zeitkonstanten – [Der CP/M Befehl INSTALL](#der-cpm-befehl-install), [Beispiel: Floppy Disk Zeitkonstanten ändern](#beispiel-floppy-disk-zeitkonstanten-ändern), [Beispiel: Tastaturbelegung](#beispiel-tastaturbelegung), [Struktur des Zeitkonstanten-Bereichs](#struktur-des-zeitkonstanten-bereichs)
+- Zero Page – [Zero Page](#zero-page)
 
 ### Sonderzeichen / Zahlen
 
-- `^C` – 103, 134, 135
-- `$OSC.SYS` – 86, 88
-- 3" Laufwerk – 2, 6, 8, 9, 16, 18, 21, 22, 23, 36, 44, 57, 60, 61, 62, 64, 67, 68, 70, 71, 76, 84, 94, 97, 98, 105, 112, 118
-- 62K CP/M – 66, 86, 88, 106
+- `$OSC.SYS` – [Die VDOS Befehle CAT und |DIR](#die-vdos-befehle-cat-und-dir), [Der VDOS Befehl |ATTRIBUT](#der-vdos-befehl-attribut)
+- 3"-Laufwerk – [Inbetriebnahme CPC464+DDI-1 mit X-Laufwerk](#inbetriebnahme-cpc464ddi-1-mit-x-laufwerk), [Der VDOS Befehl |X](#der-vdos-befehl-x), [Erstellen einer vortex CP/M plus Diskette (nur CPC6128)](#erstellen-einer-vortex-cpm-plus-diskette-nur-cpc6128), [`Loader: 3" Laufwerk=Laufwerk B.`](#loader-3-laufwerklaufwerk-b)
+- 62K CP/M – [CPC464, CPC664 mit X-Laufwerk und vortex RAM-Karte](#cpc464-cpc664-mit-x-laufwerk-und-vortex-ram-karte), [Hier noch ein paar Hinweise](#hier-noch-ein-paar-hinweise), [1 – Formatieren einer Diskette](#1--formatieren-einer-diskette), [3 – CP/M-System kopieren](#3--cpm-system-kopieren)
+- µPD 765 – [Fehlercodes und ihre Bedeutung](#fehlercodes-und-ihre-bedeutung), [Nicht relokatibler RAM-Bereich des VDOS 2.11-X ROM's](#nicht-relokatibler-ram-bereich-des-vdos-211-x-roms), [Struktur des Zeitkonstanten-Bereichs](#struktur-des-zeitkonstanten-bereichs), [Laufwerke + Controller](#laufwerke--controller)
 
 ---
 

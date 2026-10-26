@@ -51,3 +51,17 @@ gh release view v2.11
        --title "VDOS 2.12-X" --notes "..."
    ```
 4. Update the download links in `README.md` (they point to the `v2.11` assets).
+
+## The index of the manuals
+
+The index ("Stichwortverzeichnis" / "Index") links to the sections; it has no page numbers. After
+every change of a manual, build it again:
+
+```
+python3 tools/build_index.py docs/Vortex_X-Laufwerke_Manual_2.11-X.md tools/index_terms_de.txt
+python3 tools/build_index.py docs/Vortex_X-Laufwerke_Manual_EN_2.11-X.md tools/index_terms_en.txt
+```
+
+The entries and their search terms are in `tools/index_terms_de.txt` / `index_terms_en.txt`
+(format: see the head of `tools/build_index.py`). The script prints "no hit" for an entry that
+finds nothing.

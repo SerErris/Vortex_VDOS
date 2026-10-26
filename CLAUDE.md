@@ -19,6 +19,8 @@ English; the user manual is German.
 | `docs/Vortex_X-Laufwerke_Manual_2.11-X.md` | the user manual (German), the 2.0 original updated for 2.11-X, with the chapter "Bekannte Fehler in VDOS 2.11-X" | keep the style of the original; edit minimally |
 | `docs/VDOSisPD.pdf` | the public domain letter | never change |
 | `rom/` | build output (ROM images) | in `.gitignore` - never commit |
+| `docs/Vortex_X-Laufwerke_Manual_EN_2.11-X.md` | the US English translation of the manual (screen output still German) | keep in step with the German manual |
+| `tools/build_index.py`, `tools/index_terms_*.txt` | builds the linked index of both manuals | run after every manual change (see `src/MAINTAIN.md`) |
 | `src/MAINTAIN.md` | maintainer notes: what a release contains, how to build and upload | maintainer only |
 
 ## Build and check

@@ -1,0 +1,159 @@
+# Stichwortverzeichnis des deutschen Handbuchs: "Anzeige ; Suchbegriff ; Suchbegriff ..."
+# (siehe build_index.py). "Anzeige => siehe ..." ist ein Querverweis.
+`|A` ; |A
+`|AMSDOS` ; |AMSDOS
+`|ATTRIBUT` ; |ATTRIBUT
+`|B` ; |B
+`|CAS` ; |CAS
+`|CAS.IN` ; |CAS.IN
+`|CAS.OUT` ; |CAS.OUT
+`|CLOSE` ; |CLOSE
+`|CODE` ; |CODE
+`|CPM` ; |CPM
+`|CPM,1` ; |CPM,1
+`|CPM,2` ; |CPM,2
+`|DERROR` ; |DERROR
+`|DIR` ; |DIR
+`|DISC` ; |DISC
+`|DISC.IN` ; |DISC.IN
+`|DISC.OUT` ; |DISC.OUT
+`|DRIVE` ; |DRIVE
+`|ERA` ; |ERA
+`|FAST` ; |FAST
+`|FIELD` ; |FIELD
+`|FILES` ; |FILES
+`|FORMAT` ; |FORMAT
+`|FRAME` ; |FRAME
+`|GET` ; |GET
+`|OPEN` ; |OPEN
+`|PUT` ; |PUT
+`|REN` ; |REN
+`|RESET` ; |RESET
+`|ROMCAT` ; |ROMCAT
+`|ROMOFF` ; |ROMOFF
+`|SELECT` ; |SELECT
+`|SLOW` ; |SLOW
+`|TAPE` ; |TAPE
+`|USER` ; |USER
+`|X` ; |X
+`|XMON` ; |XMON
+`$OSC.SYS` ; $OSC
+3"-Laufwerk ; 3"-Laufwerk ; 3" Laufwerk
+62K CP/M ; 62K
+Akkumulator ; Akku
+ALV (Allocation Vektor) ; ALV ; Allocation Vektor
+AMSDOS ; AMSDOS
+Ausgabekanal
+Autostart-String ; Autostart
+BAK ; BAK
+BDOS ; BDOS
+Bekannte Fehler ; Bekannte Fehler
+Betriebssystem
+BIOS ; BIOS
+BIOS Jump Vektor ; Jump Vektor ; BIOS Vektor
+Block ; Block ; Blöcke
+Blockbelegungstabelle ; Blockbelegungstabelle
+Blocking/Deblocking ; Blocking ; Deblocking
+BOOTGEN ; BOOTGEN
+Bootsektor ; Bootsektor ; Bootsector
+BOS ; BOS
+Breakpoint
+Bytefolge
+CAS CATALOG ; CAS CATALOG
+CAS IN ABANDON ; CAS IN ABANDON
+CAS IN CHAR ; CAS IN CHAR
+CAS IN CLOSE ; CAS IN CLOSE
+CAS IN DIRECT ; CAS IN DIRECT
+CAS IN OPEN ; CAS IN OPEN
+CAS OUT ABANDON ; CAS OUT ABANDON
+CAS OUT CHAR ; CAS OUT CHAR
+CAS OUT CLOSE ; CAS OUT CLOSE
+CAS OUT DIRECT ; CAS OUT DIRECT
+CAS OUT OPEN ; CAS OUT OPEN
+CAS RETURN ; CAS RETURN
+CAS TEST EOF ; CAS TEST EOF
+CASCOPY ; CASCOPY
+Cassettenrekorder ; Cassettenrekorder ; Cassetten-Rekorder ; Datenrekorder ; Rekorder
+CAT ; CAT
+CCP ; CCP
+Centronics
+CLOSEIN ; CLOSEIN
+CLOSEOUT ; CLOSEOUT
+CP/M 2.2 ; CP/M 2.2
+CP/M plus ; CP/M plus
+CRC Fehler ; CRC
+CSV (Check Size Vektor) ; CSV ; Check Size
+CTRL+C ; CTRL+C ; CTRL C ; ^C
+DATA-Only Format ; DATA-Only
+Datei
+Dateiname
+Dateityp
+Diskettenfehler
+Diskettenmonitor
+Directory
+DISKTOOL ; DISKTOOL
+DOS Indirections ; Indirection
+DPB (Disk Parameter Block) ; DPB ; Disk Parameter Block
+DPH (Disk Parameter Header) ; DPH ; Disk Parameter Header
+EOF ; EOF
+EOF Problem ; EOF Problem
+Eingabekanal
+Error Patch ; Error Patch
+Extension
+Extent
+F1-X / M1-X => siehe X-Laufwerk
+FAST (CP/M Befehl) ; FAST
+FCB (File Control Block) ; FCB ; File Control Block
+FDC ; FDC
+Fehlercode
+Fehlermeldung
+FILECOPY ; FILECOPY
+Firmware ROM ; Firmware ROM ; Firmware-ROM
+Formatieren ; formatier
+HELLO.BAS ; HELLO
+HEX/ASCII ; HEX/ASCII
+HIMEM ; HIMEM
+Hostbuffer ; Hostbuffer ; Host Puffer
+I/O Byte ; I/O Byte ; IOBYTE
+INPUT#9 ; INPUT#9
+INSTALL ; INSTALL
+Kanal ; Kanal ; Kanäle
+KM DISARM BREAK ; KM DISARM BREAK
+RAM-Bank ; RAM-Bank ; Bank
+RAM-Karte ; RAM-Karte ; RAM-Erweiterung
+RAM Variablen ; RAM Variablen ; RAM-Bereich
+Record leer ; Record leer
+Rekord ; Rekord ; Record
+Rekordpuffer
+Relative Datei ; relative Datei ; relativen Datei ; relative Dateiverwaltung
+Reservierte Spuren ; reservierte
+Reset ; Reset ; Rücksetzen
+ROM WALK ; ROM WALK
+RS232C ; RS232C ; RS 232C
+RSX ; RSX
+SAVE ; SAVE
+Schreibschutz ; Schreibschutz ; schreibgeschützt
+Sektor
+Sequentielle Datei ; sequentielle
+SIO ; SIO
+Spur
+Steprate
+Stringvariable
+SYSGEN ; SYSGEN
+Systemdiskette
+Systemformat
+Systemspuren
+TPA ; TPA
+Turnkey
+µPD 765 ; µPD ; uPD
+USER-Bereich ; USER-Bereich ; USER-Bereiche ; User-Bereich
+Vendorformat
+WBOOT (Warmstart) ; WBOOT ; Warmstart
+Wildcard
+WRITE#9 ; WRITE#9
+X-Laufwerk
+XMON (CP/M Befehl) ; XMON
+XPATCH30 ; XPATCH30
+Z80 ; Z80
+Zeitkonstanten
+Zero Page
